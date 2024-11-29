@@ -56,6 +56,7 @@ var has_exploded: bool = false
 	right_booster = $BoosterBubblesRight,
 	left_booster = $BoosterBubblesLeft,
 	explosion = $ExplosionBubbles,
+	success = $SuccessBubbles,
 }
 
 # Core lifecycle methods
@@ -91,11 +92,10 @@ func _on_crash_completed() -> void:
 func _on_level_completed(next_level: String) -> void:
 	is_transitioning = true
 	set_process(false)
-	# Uncomment when success particles are created
-	#particles.success.emitting = true
+	particles.success.emitting = true
 	
 	var tween = create_tween()
-	tween.tween_interval(1)
+	tween.tween_interval(2)
 	tween.tween_callback(func(): get_tree().change_scene_to_file(next_level))
 
 func _on_landing_state_changed(on_pad: bool) -> void:
