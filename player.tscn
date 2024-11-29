@@ -1,0 +1,144 @@
+[gd_scene load_steps=9 format=3 uid="uid://brs3why3rugsi"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_scd23"]
+[ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bc2uk"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_60h71"]
+material = ExtResource("8_5sakl")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w3dbl"]
+top_radius = 0.0
+bottom_radius = 0.2
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yb2x7"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ak0p8"]
+material = ExtResource("8_5sakl")
+top_radius = 0.0
+bottom_radius = 0.15
+height = 0.25
+
+[node name="Player" type="RigidBody3D"]
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+contact_monitor = true
+max_contacts_reported = 10
+linear_damp = 1.0
+angular_damp = 3.0
+script = ExtResource("1_scd23")
+critical_tipping_angle = 53.156
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CylinderMesh_6iyt0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_bc2uk")
+
+[node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
+
+[node name="SuccessAudio" type="AudioStreamPlayer" parent="."]
+
+[node name="RocketAudio" type="AudioStreamPlayer3D" parent="."]
+
+[node name="BoosterParticles" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = null
+
+[node name="RightBoosterParticles" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -1, 0)
+script = null
+
+[node name="LeftBoosterParticles" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -1, 0)
+script = null
+
+[node name="ExplosionParticles" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
+
+[node name="SuccessParticles" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("CylinderMesh_60h71")
+
+[node name="CockpitMesh" type="MeshInstance3D" parent="BodyMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_w3dbl")
+skeleton = NodePath("../..")
+
+[node name="BoosterMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.349935, -0.748604, 0)
+mesh = SubResource("CylinderMesh_yb2x7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoosterMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, 0)
+mesh = SubResource("CylinderMesh_ak0p8")
+
+[node name="BoosterMesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352285, -0.748604, 0)
+mesh = SubResource("CylinderMesh_yb2x7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoosterMesh2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, 0)
+mesh = SubResource("CylinderMesh_ak0p8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
