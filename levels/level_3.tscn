@@ -27,9 +27,6 @@ material = SubResource("StandardMaterial3D_ev7sl")
 script = ExtResource("1_8o65u")
 file_path = "res://levels/level_4.tscn"
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 7.53, 12.73)
-
 [node name="Player" parent="." instance=ExtResource("2_nacxr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
 

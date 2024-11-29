@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=10 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_scd23"]
+[ext_resource type="Script" path="res://camera_mount.gd" id="3_lul7u"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
@@ -77,5 +78,14 @@ mesh = SubResource("CylinderMesh_yb2x7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BoosterMesh2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, 0)
 mesh = SubResource("CylinderMesh_ak0p8")
+
+[node name="CameraMount" type="Node3D" parent="."]
+script = ExtResource("3_lul7u")
+smoothing_speed = 5.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraMount"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraMount/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 7.53, 12.73)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
