@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://5w8f8rfvi5x5"]
+
+[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_8o65u"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://player.tscn" id="2_nacxr"]
+[ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://moving_hazard.tscn" id="3_7xwgo"]
+[ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://environment.tscn" id="4_hpvho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
+albedo_color = Color(0.28975, 0.408702, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev7sl"]
+albedo_color = Color(0, 0.737255, 0.321569, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, 0.005)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_340e8")
+
+[node name="LandingPad" type="CSGBox3D" parent="." groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.1, 0)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_ev7sl")
+script = ExtResource("1_8o65u")
+file_path = "res://levels/level_4.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_nacxr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
+
+[node name="MovingHazard" parent="." instance=ExtResource("3_7xwgo")]
+destination = Vector3(0, 7, 0)
+duration = 3.0
+
+[node name="Floor" parent="." instance=ExtResource("4_hpvho")]
