@@ -46,13 +46,13 @@ var is_transitioning: bool = false
 	#rocket = $RocketAudio
 #}
 #
-#@onready var particles = {
-	#booster = $BoosterParticles,
-	#right_booster = $RightBoosterParticles,
-	#left_booster = $LeftBoosterParticles,
+@onready var particles = {
+	booster = $BoosterBubblesCenter,
+	right_booster = $BoosterBubblesRight,
+	left_booster = $BoosterBubblesLeft,
 	#explosion = $ExplosionParticles,
 	#success = $SuccessParticles
-#}
+}
 
 # Core lifecycle methods
 func _physics_process(delta: float) -> void:
@@ -178,13 +178,11 @@ class EffectsSystem:
 		#else:
 			#rocket.audio.rocket.stop()
 		#
-		#rocket.particles.booster.emitting = is_thrusting
-		pass
+		rocket.particles.booster.emitting = is_thrusting
 	
 	static func update_rotation_effects(rocket: RigidBody3D, rotation_direction: float) -> void:
-		#rocket.particles.left_booster.emitting = rotation_direction < 0
-		#rocket.particles.right_booster.emitting = rotation_direction > 0
-		pass
+		rocket.particles.left_booster.emitting = rotation_direction < 0
+		rocket.particles.right_booster.emitting = rotation_direction > 0
 
 	static func play_crash_effects(rocket: RigidBody3D) -> void:
 		#rocket.particles.explosion.emitting = true
