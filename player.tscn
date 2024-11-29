@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=15 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_scd23"]
 [ext_resource type="Script" path="res://camera_mount.gd" id="3_lul7u"]
@@ -51,6 +51,29 @@ turbulence_noise_strength = 0.2
 turbulence_noise_scale = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_kkyn6"]
+material = ExtResource("4_g7o3v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2kl54"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+angle_min = 1.07288e-05
+angle_max = 353.1
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.3
+scale_max = 1.2
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
+collision_mode = 1
+collision_friction = 0.3
+collision_bounce = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_ng0vx"]
 material = ExtResource("4_g7o3v")
 
 [node name="Player" type="RigidBody3D"]
@@ -125,5 +148,14 @@ draw_pass_1 = SubResource("SphereMesh_kkyn6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356287, -1.38724, 0)
 process_material = SubResource("ParticleProcessMaterial_is62b")
 draw_pass_1 = SubResource("SphereMesh_kkyn6")
+
+[node name="ExplosionBubbles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 100
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2kl54")
+draw_pass_1 = SubResource("SphereMesh_ng0vx")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

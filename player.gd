@@ -1,5 +1,11 @@
 extends RigidBody3D
 
+# Signals for state transitions and game events
+signal crash_started
+signal crash_completed
+signal level_completed(next_level: String)
+signal landing_state_changed(is_on_pad: bool)
+
 # Configuration constants are grouped together
 const MOVEMENT = {
 	MIN_THRUST = 500,
@@ -36,160 +42,161 @@ const PHYSICS = {
 
 # State variables
 var current_stable_time: float = 0.0
-var is_on_landing_pad: bool = false
+var is_on_landing_pad: bool = false:
+	set(value):
+		if is_on_landing_pad != value:
+			is_on_landing_pad = value
+			landing_state_changed.emit(value)
 var is_transitioning: bool = false
+var has_exploded: bool = false
 
 # Node references - grouped by functionality
-#@onready var audio = {
-	#explosion = $ExplosionAudio,
-	#success = $SuccessAudio,
-	#rocket = $RocketAudio
-#}
-#
 @onready var particles = {
 	booster = $BoosterBubblesCenter,
 	right_booster = $BoosterBubblesRight,
 	left_booster = $BoosterBubblesLeft,
-	#explosion = $ExplosionParticles,
-	#success = $SuccessParticles
+	explosion = $ExplosionBubbles,
 }
 
 # Core lifecycle methods
+func _ready() -> void:
+	# Connect internal signal handlers
+	crash_started.connect(_on_crash_started)
+	crash_completed.connect(_on_crash_completed)
+	level_completed.connect(_on_level_completed)
+	landing_state_changed.connect(_on_landing_state_changed)
+
 func _physics_process(delta: float) -> void:
 	if is_transitioning:
 		return
 		
-	MovementSystem.process_movement(self, delta)
-	StabilitySystem.process_stability(self, delta)
-	LandingSystem.process_landing(self, delta)
+	process_movement(delta)
+	process_stability(delta)
+	process_landing(delta)
 
 # Signal handlers
 func _on_body_entered(body: Node) -> void:
-	if not is_transitioning and "Hazard" in body.get_groups():
-		TransitionSystem.start_crash_sequence(self)
+	if not has_exploded and not is_transitioning and "Hazard" in body.get_groups():
+		start_crash_sequence()
 
-# Systems are organized into separate classes for clarity
-class MovementSystem:
-	static func process_movement(rocket: RigidBody3D, delta: float) -> void:
-		handle_thrust(rocket, delta)
-		handle_rotation(rocket, delta)
+func _on_crash_started() -> void:
+	has_exploded = true
+	is_transitioning = true
+	set_process(false)
+	particles.explosion.emitting = true
 	
-	static func handle_thrust(rocket: RigidBody3D, delta: float) -> void:
-		var is_thrusting = Input.is_action_pressed("boost")
-		if is_thrusting:
-			rocket.apply_central_force(rocket.basis.y * rocket.thrust * delta)
-		EffectsSystem.update_thrust_effects(rocket, is_thrusting)
-	
-	static func handle_rotation(rocket: RigidBody3D, delta: float) -> void:
-		var rotation_direction = Input.get_axis("rotate_right", "rotate_left")
-		if rotation_direction != 0:
-			var torque_amount = rocket.torque * delta * rotation_direction
-			rocket.apply_torque(Vector3(0, 0, torque_amount))
-		EffectsSystem.update_rotation_effects(rocket, -rotation_direction)
+func _on_crash_completed() -> void:
+	get_tree().reload_current_scene()
 
-class StabilitySystem:
-	static func process_stability(rocket: RigidBody3D, delta: float) -> void:
-		if rocket.is_on_landing_pad:
-			apply_tipping_forces(rocket, delta)
+func _on_level_completed(next_level: String) -> void:
+	is_transitioning = true
+	set_process(false)
+	# Uncomment when success particles are created
+	#particles.success.emitting = true
 	
-	static func apply_tipping_forces(rocket: RigidBody3D, delta: float) -> void:
-		var tilt_angle = get_tilt_angle(rocket)
-		if tilt_angle > rocket.max_landing_angle and tilt_angle < rocket.critical_tipping_angle:
-			var tipping_torque = calculate_tipping_torque(rocket, tilt_angle, delta)
-			rocket.apply_torque(Vector3(0, 0, tipping_torque))
-	
-	static func calculate_tipping_torque(rocket: RigidBody3D, tilt_angle: float, delta: float) -> float:
-		var right_vector := rocket.global_transform.basis.x
-		var tilt_direction := rocket.global_transform.basis.y.cross(Vector3.UP)
-		
-		var tilt_factor = (tilt_angle - rocket.max_landing_angle) / \
-						 (rocket.critical_tipping_angle - rocket.max_landing_angle)
-		
-		var base_factor = 1.0 - (rocket.base_stability / (tilt_angle + rocket.base_stability))
-		return tilt_direction.dot(right_vector) * rocket.tipping_torque_multiplier * tilt_factor * base_factor * delta
-	
-	static func get_tilt_angle(rocket: RigidBody3D) -> float:
-		var up_direction := rocket.global_transform.basis.y
-		return rad_to_deg(acos(up_direction.dot(Vector3.UP)))
-	
-	static func is_upright(rocket: RigidBody3D) -> bool:
-		return get_tilt_angle(rocket) <= rocket.max_landing_angle
-	
-	static func is_critically_tipped(rocket: RigidBody3D) -> bool:
-		return get_tilt_angle(rocket) >= rocket.critical_tipping_angle
-	
-	static func is_landing_stable(rocket: RigidBody3D) -> bool:
-		return is_upright(rocket) and rocket.linear_velocity.length() <= rocket.max_landing_velocity
+	var tween = create_tween()
+	tween.tween_interval(1)
+	tween.tween_callback(func(): get_tree().change_scene_to_file(next_level))
 
-class LandingSystem:
-	static func process_landing(rocket: RigidBody3D, delta: float) -> void:
-		var landing_pad = get_landing_pad(rocket)
-		rocket.is_on_landing_pad = landing_pad != null
-		
-		if not rocket.is_on_landing_pad:
-			rocket.current_stable_time = 0.0
-			return
-			
-		if StabilitySystem.is_critically_tipped(rocket):
-			TransitionSystem.start_crash_sequence(rocket)
-		elif StabilitySystem.is_landing_stable(rocket):
-			rocket.current_stable_time += delta
-			if rocket.current_stable_time >= rocket.required_stable_time:
-				handle_successful_landing(rocket, landing_pad)
-	
-	static func get_landing_pad(rocket: RigidBody3D) -> Node:
-		for body in rocket.get_colliding_bodies():
-			if "Goal" in body.get_groups():
-				return body
-		return null
-	
-	static func handle_successful_landing(rocket: RigidBody3D, landing_pad: Node) -> void:
-		if landing_pad.has_method("get_next_level_path"):
-			TransitionSystem.complete_level(rocket, landing_pad.get_next_level_path())
+func _on_landing_state_changed(on_pad: bool) -> void:
+	if not on_pad:
+		current_stable_time = 0.0
 
-class TransitionSystem:
-	static func start_crash_sequence(rocket: RigidBody3D) -> void:
-		rocket.is_transitioning = true
-		rocket.set_process(false)
-		
-		EffectsSystem.play_crash_effects(rocket)
-		
-		var tween = rocket.create_tween()
-		tween.tween_interval(2.5)
-		tween.tween_callback(rocket.get_tree().reload_current_scene)
+# State change methods
+func start_crash_sequence() -> void:
+	if has_exploded:
+		return
 	
-	static func complete_level(rocket: RigidBody3D, next_level_file: String) -> void:
-		rocket.is_transitioning = true
-		rocket.set_process(false)
-		
-		EffectsSystem.play_success_effects(rocket)
-		
-		var tween = rocket.create_tween()
-		tween.tween_interval(1)
-		tween.tween_callback(
-			rocket.get_tree().change_scene_to_file.bind(next_level_file)
-		)
+	crash_started.emit()
+	var tween = create_tween()
+	tween.tween_interval(2.5)
+	tween.tween_callback(func(): crash_completed.emit())
 
-class EffectsSystem:
-	static func update_thrust_effects(rocket: RigidBody3D, is_thrusting: bool) -> void:
-		#if is_thrusting:
-			#if not rocket.audio.rocket.playing:
-				#rocket.audio.rocket.play()
-		#else:
-			#rocket.audio.rocket.stop()
-		#
-		rocket.particles.booster.emitting = is_thrusting
-	
-	static func update_rotation_effects(rocket: RigidBody3D, rotation_direction: float) -> void:
-		rocket.particles.left_booster.emitting = rotation_direction < 0
-		rocket.particles.right_booster.emitting = rotation_direction > 0
+# Movement handling
+func process_movement(delta: float) -> void:
+	handle_thrust(delta)
+	handle_rotation(delta)
 
-	static func play_crash_effects(rocket: RigidBody3D) -> void:
-		#rocket.particles.explosion.emitting = true
-		#rocket.audio.explosion.play()
-		pass
+func handle_thrust(delta: float) -> void:
+	var is_thrusting = Input.is_action_pressed("boost")
+	if is_thrusting:
+		apply_central_force(basis.y * thrust * delta)
+	update_thrust_effects(is_thrusting)
+
+func handle_rotation(delta: float) -> void:
+	var rotation_direction = Input.get_axis("rotate_right", "rotate_left")
+	if rotation_direction != 0:
+		var torque_amount = torque * delta * rotation_direction
+		apply_torque(Vector3(0, 0, torque_amount))
+	update_rotation_effects(-rotation_direction)
+
+# Stability handling
+func process_stability(delta: float) -> void:
+	if is_on_landing_pad:
+		apply_tipping_forces(delta)
+
+func apply_tipping_forces(delta: float) -> void:
+	var tilt_angle = get_tilt_angle()
+	if tilt_angle > max_landing_angle and tilt_angle < critical_tipping_angle:
+		var tipping_torque = calculate_tipping_torque(tilt_angle, delta)
+		apply_torque(Vector3(0, 0, tipping_torque))
+
+func calculate_tipping_torque(tilt_angle: float, delta: float) -> float:
+	var right_vector := global_transform.basis.x
+	var tilt_direction := global_transform.basis.y.cross(Vector3.UP)
 	
-	static func play_success_effects(rocket: RigidBody3D) -> void:
-		#rocket.particles.success.emitting = true
-		#rocket.audio.success.play()
-		pass
+	var tilt_factor = (tilt_angle - max_landing_angle) / \
+					 (critical_tipping_angle - max_landing_angle)
+	
+	var base_factor = 1.0 - (base_stability / (tilt_angle + base_stability))
+	return tilt_direction.dot(right_vector) * tipping_torque_multiplier * tilt_factor * base_factor * delta
+
+func get_tilt_angle() -> float:
+	var up_direction := global_transform.basis.y
+	return rad_to_deg(acos(up_direction.dot(Vector3.UP)))
+
+func is_upright() -> bool:
+	return get_tilt_angle() <= max_landing_angle
+
+func is_critically_tipped() -> bool:
+	return get_tilt_angle() >= critical_tipping_angle
+
+func is_landing_stable() -> bool:
+	return is_upright() and linear_velocity.length() <= max_landing_velocity
+
+# Landing handling
+func process_landing(delta: float) -> void:
+	update_landing_pad_state()
+	
+	if not is_on_landing_pad:
+		return
+		
+	if not has_exploded and is_critically_tipped():
+		start_crash_sequence()
+	elif is_landing_stable():
+		current_stable_time += delta
+		if current_stable_time >= required_stable_time:
+			handle_successful_landing()
+
+func update_landing_pad_state() -> void:
+	var landing_pad = get_landing_pad()
+	self.is_on_landing_pad = landing_pad != null  # Uses setter
+
+func get_landing_pad() -> Node:
+	for body in get_colliding_bodies():
+		if "Goal" in body.get_groups():
+			return body
+	return null
+
+func handle_successful_landing() -> void:
+	var landing_pad = get_landing_pad()
+	if landing_pad and landing_pad.has_method("get_next_level_path"):
+		level_completed.emit(landing_pad.get_next_level_path())
+
+# Visual effects
+func update_thrust_effects(is_thrusting: bool) -> void:
+	particles.booster.emitting = is_thrusting
+
+func update_rotation_effects(rotation_direction: float) -> void:
+	particles.left_booster.emitting = rotation_direction < 0
+	particles.right_booster.emitting = rotation_direction > 0
