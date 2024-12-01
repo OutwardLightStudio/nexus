@@ -1,16 +1,24 @@
-[gd_scene load_steps=25 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=27 format=3 uid="uid://brs3why3rugsi"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_scd23"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
 [ext_resource type="AudioStream" uid="uid://dnp6s7u0gu8rc" path="res://assets/sound/pop.mp3" id="2_mso6s"]
-[ext_resource type="Script" path="res://camera_mount.gd" id="3_lul7u"]
+[ext_resource type="Script" path="res://scenes/camera_mount.gd" id="3_lul7u"]
 [ext_resource type="Material" uid="uid://cpqrd0jhqcnfe" path="res://particles/bubble_particles.tres" id="4_g7o3v"]
 [ext_resource type="AudioStream" uid="uid://evbgf785fj5w" path="res://assets/sound/success.mp3" id="4_vxola"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sg736"]
+height = 1.0
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bc2uk"]
+height = 0.71
+radius = 0.21
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i81y8"]
+radius = 0.21
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_60h71"]
 material = ExtResource("8_5sakl")
@@ -52,6 +60,9 @@ color = Color(0.229069, 0.508497, 0.766997, 1)
 turbulence_enabled = true
 turbulence_noise_strength = 0.2
 turbulence_noise_scale = 2.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_kkyn6"]
 material = ExtResource("4_g7o3v")
@@ -133,10 +144,20 @@ visible = false
 mesh = SubResource("CylinderMesh_6iyt0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.508799, 0)
+shape = SubResource("CylinderShape3D_sg736")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.360569, 0)
 shape = SubResource("CylinderShape3D_bc2uk")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.805031, 0)
+shape = SubResource("SphereShape3D_i81y8")
 
 [node name="BubblesAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_05a8e")
+volume_db = -10.0
 
 [node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mso6s")
