@@ -49,6 +49,12 @@ var is_on_landing_pad: bool = false:
 			landing_state_changed.emit(value)
 var is_transitioning: bool = false
 var has_exploded: bool = false
+var is_thrusting: bool = false:
+	set(value):
+		if is_thrusting != value:
+			is_thrusting = value
+			particles.booster.emitting = value
+			sounds.bubbles.playing = value 
 
 # Node references - grouped by functionality
 @onready var particles = {
@@ -59,6 +65,12 @@ var has_exploded: bool = false
 	success = $SuccessBubbles,
 }
 
+@onready var sounds = {
+	explosion = $ExplosionAudio,
+	success = $SuccessAudio,
+	bubbles = $BubblesAudio,
+}
+
 # Core lifecycle methods
 func _ready() -> void:
 	# Connect internal signal handlers
@@ -66,6 +78,9 @@ func _ready() -> void:
 	crash_completed.connect(_on_crash_completed)
 	level_completed.connect(_on_level_completed)
 	landing_state_changed.connect(_on_landing_state_changed)
+	
+	# Ensure audio starts in stopped state
+	sounds.bubbles.playing = false
 
 func _physics_process(delta: float) -> void:
 	if is_transitioning:
@@ -82,9 +97,11 @@ func _on_body_entered(body: Node) -> void:
 
 func _on_crash_started() -> void:
 	has_exploded = true
+	is_thrusting = false
 	is_transitioning = true
 	set_process(false)
 	particles.explosion.emitting = true
+	sounds.explosion.playing = true
 	
 func _on_crash_completed() -> void:
 	get_tree().reload_current_scene()
@@ -93,6 +110,7 @@ func _on_level_completed(next_level: String) -> void:
 	is_transitioning = true
 	set_process(false)
 	particles.success.emitting = true
+	sounds.success.playing = true
 	
 	var tween = create_tween()
 	tween.tween_interval(2)
@@ -118,10 +136,15 @@ func process_movement(delta: float) -> void:
 	handle_rotation(delta)
 
 func handle_thrust(delta: float) -> void:
-	var is_thrusting = Input.is_action_pressed("boost")
+	var new_thrust_state = Input.is_action_pressed("boost")
+	if new_thrust_state != is_thrusting:
+		is_thrusting = new_thrust_state
+		# Update effects when state changes
+		particles.booster.emitting = is_thrusting
+		sounds.bubbles.playing = is_thrusting
+	
 	if is_thrusting:
 		apply_central_force(basis.y * thrust * delta)
-	update_thrust_effects(is_thrusting)
 
 func handle_rotation(delta: float) -> void:
 	var rotation_direction = Input.get_axis("rotate_right", "rotate_left")
@@ -196,6 +219,7 @@ func handle_successful_landing() -> void:
 # Visual effects
 func update_thrust_effects(is_thrusting: bool) -> void:
 	particles.booster.emitting = is_thrusting
+	sounds.bubbles.playing = is_thrusting
 
 func update_rotation_effects(rotation_direction: float) -> void:
 	particles.left_booster.emitting = rotation_direction < 0
