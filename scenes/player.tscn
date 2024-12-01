@@ -128,7 +128,7 @@ material = SubResource("StandardMaterial3D_82jvj")
 radius = 0.4
 height = 0.8
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("booster_particles", "right_booster_particles", "left_booster_particles", "explosion_particles", "success_particles", "explosion_sound", "success_sound", "bubbles_sound")]
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -138,6 +138,14 @@ linear_damp = 1.0
 angular_damp = 3.0
 script = ExtResource("1_scd23")
 critical_tipping_angle = 53.156
+booster_particles = NodePath("BoosterBubblesCenter")
+right_booster_particles = NodePath("BoosterBubblesRight")
+left_booster_particles = NodePath("BoosterBubblesLeft")
+explosion_particles = NodePath("ExplosionBubbles")
+success_particles = NodePath("SuccessBubbles")
+explosion_sound = NodePath("PopAudio")
+success_sound = NodePath("SuccessAudio")
+bubbles_sound = NodePath("BubblesAudio")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -154,16 +162,6 @@ shape = SubResource("CylinderShape3D_bc2uk")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.805031, 0)
 shape = SubResource("SphereShape3D_i81y8")
-
-[node name="BubblesAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_05a8e")
-volume_db = -10.0
-
-[node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_mso6s")
-
-[node name="SuccessAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_vxola")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
@@ -234,5 +232,15 @@ randomness = 0.59
 trail_lifetime = 2.33
 process_material = SubResource("ParticleProcessMaterial_vrcvt")
 draw_pass_1 = SubResource("SphereMesh_ifw7w")
+
+[node name="BubblesAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_05a8e")
+
+[node name="SuccessAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_vxola")
+
+[node name="PopAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_mso6s")
+volume_db = 5.162
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
