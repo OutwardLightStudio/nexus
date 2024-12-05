@@ -15,7 +15,7 @@ albedo_color = Color(0, 0.737255, 0.321569, 1)
 
 [node name="Level" type="Node3D"]
 
-[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+[node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 2.5, 0.035)
 use_collision = true
 size = Vector3(5, 5, 5)
@@ -33,7 +33,7 @@ use_collision = true
 size = Vector3(3, 0.2, 3)
 material = SubResource("StandardMaterial3D_ev7sl")
 script = ExtResource("1_u7v38")
-file_path = "res://levels/level_3.tscn"
+file_path = "res://levels/level_2.5.tscn"
 
 [node name="Player" parent="." instance=ExtResource("2_hyudu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)

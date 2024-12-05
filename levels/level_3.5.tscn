@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://ydm0ic5jc0ol"]
+
+[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_p7kr6"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player.tscn" id="2_a7bpk"]
+[ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://scenes/environment.tscn" id="3_ym2lf"]
+[ext_resource type="PackedScene" uid="uid://7e87dwxuo4u2" path="res://scenes/sliding_door.tscn" id="4_lx6il"]
+[ext_resource type="PackedScene" uid="uid://bwwd8ds1by6v4" path="res://scenes/trigger_pad.tscn" id="5_rtble"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrd0v"]
+albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
+albedo_color = Color(0.28975, 0.408702, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev7sl"]
+albedo_color = Color(0, 0.737255, 0.321569, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="Obstacle" type="CSGBox3D" parent="."]
+transform = Transform3D(5.78315e-16, -2.74487e-08, 3.0067, -0.302674, -2.74487e-08, 0, 1.32303e-08, -0.627953, -1.31427e-07, 2.03642, 8.43843, 0.0264051)
+use_collision = true
+size = Vector3(5, 5, 3.64838)
+material = SubResource("StandardMaterial3D_nrd0v")
+
+[node name="Obstacle2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.302586, -2.67787e-08, -0.0725162, 0.00729994, 2.81027e-08, -3.00583, 1.32303e-08, -0.627953, -1.31427e-07, 6.80788, 12.4211, 0.0264053)
+use_collision = true
+size = Vector3(5, 5, 2.15027)
+material = SubResource("StandardMaterial3D_nrd0v")
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, 0.005)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_340e8")
+
+[node name="LandingPad" type="CSGBox3D" parent="." groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.1, 0)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_ev7sl")
+script = ExtResource("1_p7kr6")
+file_path = "res://levels/level_4.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_a7bpk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
+
+[node name="Floor" parent="." instance=ExtResource("3_ym2lf")]
+
+[node name="SlidingDoor" parent="." instance=ExtResource("4_lx6il")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.87338, 0, 1, 0, -4.37114e-08, 7.66363, 3.08143, 0.0347519)
+open_distance = 8.5
+
+[node name="TriggerPad" parent="." instance=ExtResource("5_rtble")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97707, 9.2868, 0)
+controlled_door_path = NodePath("../SlidingDoor")

@@ -15,7 +15,7 @@ albedo_color = Color(0, 0.737255, 0.321569, 1)
 
 [node name="Level" type="Node3D"]
 
-[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+[node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(0.234957, 0.0137962, 1.89427, -0.19071, -0.00288429, 2.33475, 0.00603955, -0.627795, 0.0309015, 3.93607, 5.61039, 0.026405)
 use_collision = true
 size = Vector3(5, 5, 4.91199)

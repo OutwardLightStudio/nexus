@@ -28,7 +28,7 @@ const MOVEMENT = {
 
 const LANDING = {
 	MAX_ANGLE = 60.0,        # Forgiving angle for landing attempts
-	CRITICAL_ANGLE = 110,    # Only crash when almost completely tipped over
+	CRITICAL_ANGLE = 90,    # Only crash when almost completely tipped over
 	STABLE_TIME = 0.5,       # Time required to register a successful landing
 	MAX_VELOCITY = 50.0      # Maximum allowable landing velocity
 }

@@ -18,7 +18,7 @@ ambient_light_source = 3
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Floor" type="CSGBox3D" groups=["Hazard"]]
+[node name="Floor" type="CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0034647, -4.03332, 0.0347519)
 use_collision = true
 size = Vector3(38, 8, 5)

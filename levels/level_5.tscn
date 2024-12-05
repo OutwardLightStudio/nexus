@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://ca5crnx7u4ws"]
 
-[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_jax1y"]
-[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player.tscn" id="2_24npa"]
-[ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="3_rgxx0"]
-[ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://scenes/environment.tscn" id="4_iyla6"]
+[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_tbnwg"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player.tscn" id="2_823ak"]
+[ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="3_xq7h4"]
+[ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://scenes/environment.tscn" id="4_23cqt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
@@ -27,26 +27,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.1, 0)
 use_collision = true
 size = Vector3(3, 0.2, 3)
 material = SubResource("StandardMaterial3D_ev7sl")
-script = ExtResource("1_jax1y")
+script = ExtResource("1_tbnwg")
 file_path = "res://levels/level.tscn"
 
-[node name="Player" parent="." instance=ExtResource("2_24npa")]
+[node name="Player" parent="." instance=ExtResource("2_823ak")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
 
-[node name="MovingHazard" parent="." instance=ExtResource("3_rgxx0")]
+[node name="MovingHazard" parent="." instance=ExtResource("3_xq7h4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.14345, 1.8113, 0)
 destination = Vector3(0, 7, 0)
 duration = 3.0
 
-[node name="MovingHazard2" parent="." instance=ExtResource("3_rgxx0")]
+[node name="MovingHazard2" parent="." instance=ExtResource("3_xq7h4")]
 transform = Transform3D(0.395629, 0, 0, 0, 0.364669, 0, 0, 0, 1, -11.4505, 6.25543, 0.0828445)
-destination = Vector3(0, -7, 0)
+destination = Vector3(0, -5, 0)
 duration = 3.0
 
-[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+[node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 8.69225, 0.035)
 use_collision = true
 size = Vector3(1, 10, 5)
 material = SubResource("StandardMaterial3D_4jfft")
 
-[node name="Floor" parent="." instance=ExtResource("4_iyla6")]
+[node name="Floor" parent="." instance=ExtResource("4_23cqt")]
