@@ -50,7 +50,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
 
 [node name="SlidingDoor" parent="." instance=ExtResource("4_lx6il")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.87338, 0, 1, 0, -4.37114e-08, 7.66363, 3.08143, 0.0347519)
-open_distance = 8.5
+open_distance = 9.0
 
 [node name="TriggerPad" parent="." instance=ExtResource("5_rtble")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97707, 9.2868, 0)
