@@ -40,6 +40,11 @@ const PHYSICS = {
 
 const UP_VECTOR := Vector3.UP
 const THRUST_VECTOR := Vector3.UP
+
+const RECOVERY = {
+	MAX_RECOVERY_TIME = 0.5,  # Time allowed to recover from tipping over
+	CHECK_INTERVAL = 0.1      # How often to update recovery status
+}
 #endregion
 
 #region Exported Parameters
@@ -87,6 +92,9 @@ var is_thrusting: bool = false:
 			is_thrusting = value
 			booster_particles.emitting = value
 			bubbles_sound.playing = value
+
+var time_since_critical_tilt: float = 0.0  # Tracks how long we've been tipped over
+var last_tilt_check_time: float = 0.0      # Helps optimize tilt checking
 #endregion
 
 #region Lifecycle Methods
@@ -101,6 +109,7 @@ func _physics_process(delta: float) -> void:
 	process_movement(delta)
 	process_stability(delta)
 	process_landing(delta)
+	process_recovery(delta)
 
 func _connect_signals() -> void:
 	if not crashed.is_connected(_on_crashed):
@@ -249,4 +258,26 @@ func handle_successful_landing() -> void:
 		var next_level = landing_pad.get_next_level_path()
 		if not next_level.is_empty():
 			level_finished.emit(next_level)
+#endregion
+
+#region Recovery
+func process_recovery(delta: float) -> void:
+	# Only update our check periodically to avoid unnecessary calculations
+	last_tilt_check_time += delta
+	if last_tilt_check_time < RECOVERY.CHECK_INTERVAL:
+		return
+	last_tilt_check_time = 0.0
+	
+	var current_tilt = get_tilt_angle()
+	
+	# If we're critically tipped and not on a landing pad
+	if current_tilt >= critical_tipping_angle and not is_on_landing_pad:
+		time_since_critical_tilt += delta
+		
+		# If we've been tipped too long, crash
+		if time_since_critical_tilt >= RECOVERY.MAX_RECOVERY_TIME:
+			start_crash_sequence()
+	else:
+		# Reset the timer if we're not critically tipped
+		time_since_critical_tilt = 0.0
 #endregion
