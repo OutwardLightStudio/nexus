@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://7e87dwxuo4u2"]
+
+[ext_resource type="Script" path="res://scenes/sliding_door.gd" id="1_0nt16"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyy2r"]
+albedo_color = Color(0.971909, 0, 0.22458, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_we4h3"]
+material = SubResource("StandardMaterial3D_vyy2r")
+size = Vector3(3, 5, 0.2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_x2xb8"]
+data = PackedVector3Array(-1.5, 2.5, 0.1, 1.5, 2.5, 0.1, -1.5, -2.5, 0.1, 1.5, 2.5, 0.1, 1.5, -2.5, 0.1, -1.5, -2.5, 0.1, 1.5, 2.5, -0.1, -1.5, 2.5, -0.1, 1.5, -2.5, -0.1, -1.5, 2.5, -0.1, -1.5, -2.5, -0.1, 1.5, -2.5, -0.1, 1.5, 2.5, 0.1, 1.5, 2.5, -0.1, 1.5, -2.5, 0.1, 1.5, 2.5, -0.1, 1.5, -2.5, -0.1, 1.5, -2.5, 0.1, -1.5, 2.5, -0.1, -1.5, 2.5, 0.1, -1.5, -2.5, -0.1, -1.5, 2.5, 0.1, -1.5, -2.5, 0.1, -1.5, -2.5, -0.1, 1.5, 2.5, 0.1, -1.5, 2.5, 0.1, 1.5, 2.5, -0.1, -1.5, 2.5, 0.1, -1.5, 2.5, -0.1, 1.5, 2.5, -0.1, -1.5, -2.5, 0.1, 1.5, -2.5, 0.1, -1.5, -2.5, -0.1, 1.5, -2.5, 0.1, 1.5, -2.5, -0.1, -1.5, -2.5, -0.1)
+
+[node name="SlidingDoor" type="StaticBody3D"]
+script = ExtResource("1_0nt16")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_we4h3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_x2xb8")

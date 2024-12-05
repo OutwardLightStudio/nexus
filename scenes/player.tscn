@@ -11,7 +11,7 @@
 [sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sg736"]
-height = 1.0
+height = 1.2
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bc2uk"]
 height = 0.71
@@ -152,7 +152,7 @@ visible = false
 mesh = SubResource("CylinderMesh_6iyt0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.508799, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.603185, 0)
 shape = SubResource("CylinderShape3D_sg736")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
@@ -199,16 +199,19 @@ transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195
 
 [node name="BoosterBubblesCenter" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.08897, 0)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_is62b")
 draw_pass_1 = SubResource("SphereMesh_kkyn6")
 
 [node name="BoosterBubblesRight" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39967, -1.3866, 0)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_is62b")
 draw_pass_1 = SubResource("SphereMesh_kkyn6")
 
 [node name="BoosterBubblesLeft" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356287, -1.38724, 0)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_is62b")
 draw_pass_1 = SubResource("SphereMesh_kkyn6")
 
