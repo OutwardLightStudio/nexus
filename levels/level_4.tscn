@@ -28,7 +28,7 @@ use_collision = true
 size = Vector3(3, 0.2, 3)
 material = SubResource("StandardMaterial3D_ev7sl")
 script = ExtResource("1_ww52m")
-file_path = "res://levels/level.tscn"
+file_path = "res://levels/level_5.tscn"
 
 [node name="Player" parent="." instance=ExtResource("2_0w0kj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67474, 1.8113, 0)
 destination = Vector3(0, 7, 0)
 duration = 3.0
 
-[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+[node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 4.9656, 0.035)
 use_collision = true
 size = Vector3(1, 10, 5)
