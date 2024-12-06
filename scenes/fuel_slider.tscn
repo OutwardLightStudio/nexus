@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bds3pc6arkgvv"]
+
+[node name="FuelSlider" type="VSlider"]
+offset_right = 17.0
+offset_bottom = 305.0
+value = 100.0
