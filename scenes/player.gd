@@ -74,6 +74,19 @@ var thrust: int = MOVEMENT.DEFAULT_THRUST
 @export var explosion_sound: AudioStreamPlayer3D
 @export var success_sound: AudioStreamPlayer3D
 @export var bubbles_sound: AudioStreamPlayer3D
+
+@export_group("Fuel")
+@export var max_fuel: float = 100
+@export var fuel_decrease: float = 10
+@export var boost_fuel_cost: float = 30.0
+@export var boost_thrust: float = 3000.0
+@export var boost_duration: float = 0.2
+var thrust_active: bool = false
+var current_fuel: float = max_fuel
+var boosting: bool = false  
+var boost_timer: float = 0.0
+
+@onready var fuel_slider: VSlider = $FuelSlider
 #endregion
 
 #region State Variables
@@ -101,7 +114,28 @@ var last_tilt_check_time: float = 0.0      # Helps optimize tilt checking
 func _ready() -> void:
 	_connect_signals()
 	bubbles_sound.playing = false
-
+	fuel_slider.max_value = max_fuel
+	fuel_slider.value = current_fuel
+	fuel_slider.editable = false
+func _process(delta: float) -> void:
+	if thrust_active == true:
+		decrease_fuel(delta)
+		
+	if current_fuel <= 0.0:
+		thrust_active = false
+		bubbles_sound.playing = false
+		booster_particles.emitting = false
+		right_booster_particles.emitting = false
+		left_booster_particles.emitting = false
+		
+	if boosting == true:
+		boost_timer -= delta
+		if boost_timer <= 0.0:
+			boosting = false
+		
+	fuel_slider.value = current_fuel
+	#update_fuel_slider(delta)
+	
 func _physics_process(delta: float) -> void:
 	if current_state == State.TRANSITIONING or current_state == State.CRASHED:
 		return
@@ -173,8 +207,17 @@ func handle_thrust(delta: float) -> void:
 	if new_thrust_state != is_thrusting:
 		self.is_thrusting = new_thrust_state
 	
-	if is_thrusting:
+	if is_thrusting and current_fuel > 0.0 and not boosting:
 		apply_central_force(basis.y * thrust * delta)
+		thrust_active = true
+	elif boosting == true:
+		apply_central_force(basis.y * boost_thrust * delta)
+		thrust_active = false
+	elif Input.is_action_just_released("boost") or boosting == true:
+		thrust_active = false
+		
+	if Input.is_action_just_pressed("boost_thrust") and current_fuel >= boost_fuel_cost:
+		activate_boost()
 
 func handle_rotation(delta: float) -> void:
 	var rotation_direction = Input.get_axis("rotate_right", "rotate_left")
@@ -280,4 +323,22 @@ func process_recovery(delta: float) -> void:
 	else:
 		# Reset the timer if we're not critically tipped
 		time_since_critical_tilt = 0.0
+#endregion
+
+#region Boost
+func activate_boost() -> void:
+	current_fuel -= boost_fuel_cost
+	current_fuel = clamp(current_fuel, 0.0, max_fuel)
+	boosting = true
+	boost_timer = boost_duration
+#endregion 
+
+
+#region Fuel
+func decrease_fuel(delta: float) -> void:
+	current_fuel -= fuel_decrease * delta
+	current_fuel = clamp(current_fuel, 0.0, max_fuel)
+	
+#func update_fuel_slider(delta: float) -> void:
+	#fuel_slider.value = lerp(fuel_slider.value, current_fuel, 5.0 * delta)
 #endregion

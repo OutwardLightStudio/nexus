@@ -30,3 +30,4 @@ file_path = "res://levels/level_2.tscn"
 
 [node name="Player" parent="." instance=ExtResource("1_fgnnu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
+boost_duration = 0.3
