@@ -18,6 +18,7 @@ func _ready() -> void:
 func connect_signals() -> void:
 	if parent and parent.fuel_controller:
 		parent.fuel_controller.fuel_depleted.connect(_on_fuel_depleted)
+		parent.fuel_controller.boost_fuel_consumed.connect(_on_boost_fuel_consumed)
 
 func process(delta: float) -> void:
 	if parent.current_state in [parent.State.CRASHED, parent.State.TRANSITIONING]:
@@ -134,3 +135,7 @@ func _on_fuel_depleted() -> void:
 	
 	if is_boost_active:
 		deactivate_boost()
+
+func _on_boost_fuel_consumed() -> void:
+	activate_boost()
+	boost_activated.emit()

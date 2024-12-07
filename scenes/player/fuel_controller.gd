@@ -1,13 +1,12 @@
 extends Node3D
 class_name FuelController
 
+signal fuel_depleted
+signal boost_fuel_consumed  # New signal for when boost fuel is consumed
+
 @onready var fuel_slider: VSlider = $FuelSlider
 @onready var parent: RocketController = get_parent() as RocketController
 
-signal fuel_depleted
-signal boost_requested
-
-# Time to wait after fuel depletion before crashing
 const FUEL_OUT_CRASH_DELAY = 5.0
 var time_since_fuel_out: float = 0.0
 var is_fuel_depleted: bool = false
@@ -37,26 +36,29 @@ func process(delta: float):
 	update_fuel_display(parent.current_fuel)
 	
 	# Handle fuel depletion
+	handle_fuel_depletion(delta)
+
+func handle_fuel_depletion(delta: float):
 	if parent.current_fuel <= 0:
 		if not is_fuel_depleted:
 			is_fuel_depleted = true
 			fuel_depleted.emit()
 		
-		# Start counting time since fuel ran out
 		time_since_fuel_out += delta
-		
-		# Trigger crash sequence after delay
 		if time_since_fuel_out >= FUEL_OUT_CRASH_DELAY:
 			parent.start_crash_sequence()
 	else:
-		# Reset fuel depletion tracking if we somehow get more fuel
 		is_fuel_depleted = false
 		time_since_fuel_out = 0.0
-
-	# Handle boost requests
-	if Input.is_action_just_pressed("boost") and parent.current_fuel >= parent.boost_fuel_cost:
-		boost_requested.emit()
 
 func update_fuel_display(current_fuel: float):
 	if fuel_slider:
 		fuel_slider.value = current_fuel
+
+func try_consume_boost_fuel() -> bool:
+	if parent.current_fuel >= parent.boost_fuel_cost:
+		parent.current_fuel -= parent.boost_fuel_cost
+		parent.current_fuel = clamp(parent.current_fuel, 0.0, parent.max_fuel)
+		boost_fuel_consumed.emit()
+		return true
+	return false

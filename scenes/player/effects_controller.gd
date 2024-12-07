@@ -20,8 +20,6 @@ func connect_signals():
 			parent.crash_ended.connect(_on_crash_ended)
 			parent.level_finished.connect(_on_level_finished)
 			parent.landing_state_changed.connect(_on_landing_state_changed)
-			if parent.fuel_controller:
-				parent.fuel_controller.boost_requested.connect(_on_boost_requested)
 
 func _on_crashed():
 	play_explosion()

@@ -94,9 +94,6 @@ func _physics_process(delta: float):
 	landing.process(delta)
 
 func connect_signals():
-	# Fuel signals
-	fuel_controller.boost_requested.connect(_on_boost_requested)
-	
 	# Custom rocket signals
 	crashed.connect(_on_crashed)
 	crash_ended.connect(_on_crash_ended)
