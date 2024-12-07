@@ -27,16 +27,6 @@ const UP_VECTOR := Vector3.UP
 @export var tipping_torque_multiplier: float = 0.3
 @export var base_stability: float = 150.0
 
-@export_group("Particles")
-@export var explosion_particles: GPUParticles3D
-@export var success_particles: GPUParticles3D
-@export var booster_particles: GPUParticles3D
-
-@export_group("Audio")
-@export var explosion_sound: AudioStreamPlayer3D
-@export var success_sound: AudioStreamPlayer3D
-@export var bubbles_sound: AudioStreamPlayer3D
-
 @export_group("Fuel")
 @export var max_fuel: float = 100
 @export var fuel_decrease: float = 10
@@ -49,8 +39,6 @@ var is_thrusting: bool = false:
 	set(value):
 		if is_thrusting != value:
 			is_thrusting = value
-			booster_particles.emitting = value
-			bubbles_sound.playing = value
 
 var current_fuel: float = max_fuel
 var boosting: bool = false

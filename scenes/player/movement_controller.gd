@@ -4,8 +4,6 @@ class_name MovementController
 signal boost_activated
 
 @onready var parent: RocketController = get_parent() as RocketController
-@onready var left_booster: GPUParticles3D = $BoosterBubblesLeft
-@onready var right_booster: GPUParticles3D = $BoosterBubblesRight
 
 # Boost-related state
 var boost_timer: float = 0.0
@@ -30,9 +28,11 @@ func process(delta: float) -> void:
 
 # Primary movement processing methods
 func process_thrust(delta: float) -> void:
-	# Only allow regular thrust when not boosting
 	if not is_boost_active:
-		parent.is_thrusting = Input.is_action_pressed("thrust") and parent.current_fuel > 0.0
+		var should_thrust = Input.is_action_pressed("thrust") and parent.current_fuel > 0.0
+		if parent.is_thrusting != should_thrust:
+			parent.is_thrusting = should_thrust
+			parent.effects.update_thrust_effects(should_thrust)
 		
 		if parent.is_thrusting:
 			apply_thrust_force(delta)
@@ -52,7 +52,7 @@ func process_rotation(delta: float) -> void:
 	if rotation_direction != 0:
 		apply_rotation(rotation_direction, delta)
 	
-	update_rotation_visuals(rotation_direction)
+	parent.effects.update_rotation_effects(rotation_direction)
 
 # Thrust-related methods
 func apply_thrust_force(delta: float) -> void:
@@ -111,9 +111,6 @@ func apply_rotation(rotation_direction: float, delta: float) -> void:
 	var torque_amount = parent.torque * delta * rotation_direction
 	parent.apply_torque(Vector3(0, 0, torque_amount))
 
-func update_rotation_visuals(rotation_direction: float) -> void:
-	left_booster.emitting = rotation_direction < 0
-	right_booster.emitting = rotation_direction > 0
 
 # Shared physics helper methods
 func calculate_dampened_force(base_force: float, max_speed: float, current_speed: float) -> float:
