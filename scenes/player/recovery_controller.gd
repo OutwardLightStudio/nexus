@@ -1,24 +1,38 @@
 extends Node
 class_name RecoveryController
 
-const RECOVERY_MAX_TIME = 0.5
-const RECOVERY_CHECK_INTERVAL = 0.1
+@onready var parent: RocketController = get_parent() as RocketController
+
+const RECOVERY_MAX_TIME = 2.5
+var time_since_critical_tilt: float = 0.0
+var was_critically_tilted: bool = false
+
+func _ready():
+	await get_tree().process_frame
+	connect_signals()
+
+func connect_signals():
+	if parent and parent.stability:
+		parent.stability.connect("tilt_changed", self._on_tilt_changed)
 
 func process(delta: float):
-	var parent = get_parent() as RocketController
-	parent.last_tilt_check_time += delta
-	if parent.last_tilt_check_time < RECOVERY_CHECK_INTERVAL:
+	if parent.current_state in [parent.State.CRASHED, parent.State.TRANSITIONING]:
 		return
-	parent.last_tilt_check_time = 0.0
+	
+	check_tilt_and_crash(delta)
 
-	var tilt = get_tilt_angle(parent)
-	if tilt >= parent.critical_tipping_angle and not parent.is_on_landing_pad:
-		parent.time_since_critical_tilt += delta
-		if parent.time_since_critical_tilt >= RECOVERY_MAX_TIME:
+func _on_tilt_changed(tilt: float):
+	check_tilt_and_crash(get_physics_process_delta_time())
+
+func check_tilt_and_crash(delta: float):
+	var is_critically_tilted = parent.tilt_angle >= parent.critical_tipping_angle
+	
+	if is_critically_tilted:
+		time_since_critical_tilt += delta
+		
+		if time_since_critical_tilt >= RECOVERY_MAX_TIME:
 			parent.start_crash_sequence()
 	else:
-		parent.time_since_critical_tilt = 0.0
+		time_since_critical_tilt = 0.0
 
-func get_tilt_angle(parent: RocketController) -> float:
-	var up_direction = parent.global_transform.basis.y
-	return rad_to_deg(acos(up_direction.dot(Vector3.UP)))
+	was_critically_tilted = is_critically_tilted

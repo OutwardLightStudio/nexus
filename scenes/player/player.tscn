@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=34 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
 [ext_resource type="Script" path="res://scenes/player/recovery_controller.gd" id="8_80706"]
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="8_o0vq7"]
+[ext_resource type="Script" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_is62b"]
 lifetime_randomness = 0.2
@@ -147,9 +148,9 @@ critical_tipping_angle = 53.156
 explosion_particles = NodePath("Effects/ExplosionBubbles")
 success_particles = NodePath("Effects/SuccessBubbles")
 booster_particles = NodePath("Movement/BoosterBubblesCenter")
-explosion_sound = NodePath("Audio/PopAudio")
-success_sound = NodePath("Audio/SuccessAudio")
-bubbles_sound = NodePath("Audio/BubblesAudio")
+explosion_sound = NodePath("Effects/ExplosionAudio")
+success_sound = NodePath("Effects/SuccessAudio")
+bubbles_sound = NodePath("Effects/BubblesAudio")
 
 [node name="Movement" type="Node3D" parent="."]
 script = ExtResource("2_m6058")
@@ -237,6 +238,7 @@ smoothing_speed = 5.0
 transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 7.53, 12.73)
 
 [node name="Effects" type="Node3D" parent="."]
+script = ExtResource("11_smcew")
 
 [node name="ExplosionBubbles" type="GPUParticles3D" parent="Effects"]
 emitting = false
@@ -259,15 +261,13 @@ trail_lifetime = 2.33
 process_material = SubResource("ParticleProcessMaterial_vrcvt")
 draw_pass_1 = SubResource("SphereMesh_ifw7w")
 
-[node name="Audio" type="Node3D" parent="."]
-
-[node name="BubblesAudio" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="BubblesAudio" type="AudioStreamPlayer3D" parent="Effects"]
 stream = ExtResource("2_05a8e")
 
-[node name="SuccessAudio" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="SuccessAudio" type="AudioStreamPlayer3D" parent="Effects"]
 stream = ExtResource("4_vxola")
 
-[node name="PopAudio" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="Effects"]
 stream = ExtResource("2_mso6s")
 volume_db = 5.162
 

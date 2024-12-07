@@ -1,34 +1,47 @@
 extends Node
 class_name LandingController
 
+signal successful_landing
+signal landing_pad_detected(on_pad: bool)
+
+@onready var parent: RocketController = get_parent() as RocketController
+
+func _ready():
+	await get_tree().process_frame
+	connect_signals()
+
+func connect_signals():
+	if parent and parent.stability:
+		parent.stability.connect("tilt_changed", self._on_tilt_changed)
+
 func process(delta: float):
-	var parent = get_parent() as RocketController
-	update_landing_pad_state(parent)
+	update_landing_pad_state()
 
 	if not parent.is_on_landing_pad:
 		return
 
-	# Check crash
-	if parent.current_state != parent.State.CRASHED and is_critically_tipped(parent):
-		parent.start_crash_sequence()
-	# Check stable landing
-	elif is_landing_stable(parent):
+	if is_landing_stable():
 		parent.current_stable_time += delta
 		if parent.current_stable_time >= parent.required_stable_time:
-			handle_successful_landing(parent)
+			handle_successful_landing()
+	else:
+		parent.current_stable_time = 0.0
 
-func update_landing_pad_state(parent: RocketController):
-	var landing_pad = get_landing_pad(parent)
-	parent.is_on_landing_pad = landing_pad != null
+func update_landing_pad_state():
+	var landing_pad = get_landing_pad()
+	var on_pad = landing_pad != null
+	if on_pad != parent.is_on_landing_pad:
+		parent.is_on_landing_pad = on_pad
+		landing_pad_detected.emit(on_pad)
 
-func get_landing_pad(parent: RocketController) -> Node:
+func get_landing_pad() -> Node:
 	for body in parent.get_colliding_bodies():
 		if "Goal" in body.get_groups():
 			return body
 	return null
 
-func handle_successful_landing(parent: RocketController):
-	var landing_pad = get_landing_pad(parent)
+func handle_successful_landing():
+	var landing_pad = get_landing_pad()
 	if not landing_pad:
 		return
 
@@ -39,17 +52,15 @@ func handle_successful_landing(parent: RocketController):
 		var next_level = landing_pad.get_next_level_path()
 		if not next_level.is_empty():
 			parent.level_finished.emit(next_level)
+			successful_landing.emit()
 
-func is_critically_tipped(parent: RocketController) -> bool:
-	return get_tilt_angle(parent) >= parent.critical_tipping_angle
-
-func is_landing_stable(parent: RocketController) -> bool:
+func is_landing_stable() -> bool:
 	var current_velocity = parent.linear_velocity.length()
-	return is_upright(parent) and current_velocity <= parent.max_landing_velocity
+	return parent.tilt_angle <= parent.max_landing_angle and current_velocity <= parent.max_landing_velocity
 
-func is_upright(parent: RocketController) -> bool:
-	return get_tilt_angle(parent) <= parent.max_landing_angle
+func _on_tilt_changed(tilt: float):
+	if not parent.is_on_landing_pad:
+		return
 
-func get_tilt_angle(parent: RocketController) -> float:
-	var up_direction = parent.global_transform.basis.y
-	return rad_to_deg(acos(up_direction.dot(Vector3.UP)))
+	if tilt >= parent.critical_tipping_angle:
+		parent.start_crash_sequence()
