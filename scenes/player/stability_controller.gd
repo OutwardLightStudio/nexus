@@ -34,11 +34,9 @@ func process(delta: float):
 	if is_critically_tilted:
 		# Accumulate time spent in dangerous tilt
 		time_since_critical_tilt += delta
-		print("Time critically tilted:", time_since_critical_tilt)  # Debug
 		
 		# Trigger crash if tilted too long
 		if time_since_critical_tilt >= RECOVERY_MAX_TIME:
-			print("Initiating crash sequence!")  # Debug
 			parent.start_crash_sequence()
 	else:
 		# Reset recovery timer when safe
