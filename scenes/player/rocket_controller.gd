@@ -72,7 +72,6 @@ var tilt_angle: float = 0.0
 @onready var fuel_controller = $Fuel
 @onready var stability = $Stability
 @onready var landing = $Landing
-@onready var recovery = $Recovery
 @onready var effects = $Effects
 
 
@@ -93,7 +92,6 @@ func _physics_process(delta: float):
 	movement.process(delta)
 	stability.process(delta)
 	landing.process(delta)
-	recovery.process(delta)
 
 func connect_signals():
 	# Fuel signals

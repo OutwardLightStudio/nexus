@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=33 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scenes/player/stability_controller.gd" id="6_jxs5u"]
 [ext_resource type="Script" path="res://scenes/player/landing_controller.gd" id="7_p66tl"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
-[ext_resource type="Script" path="res://scenes/player/recovery_controller.gd" id="8_80706"]
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="8_o0vq7"]
 [ext_resource type="Script" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
 
@@ -183,9 +182,6 @@ script = ExtResource("6_jxs5u")
 
 [node name="Landing" type="Node3D" parent="."]
 script = ExtResource("7_p66tl")
-
-[node name="Recovery" type="Node3D" parent="."]
-script = ExtResource("8_80706")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
