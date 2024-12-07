@@ -1,25 +1,49 @@
 extends Node
 class_name StabilityController
 
+signal tilt_changed(tilt: float)
+
+@onready var parent: RocketController = get_parent() as RocketController
+
+# Recovery settings
+const RECOVERY_MAX_TIME = 2.5  # Time window for recovery before crash
+var time_since_critical_tilt: float = 0.0
+var was_critically_tilted: bool = false
+
+func _ready():
+	await get_tree().process_frame
+	if not parent:
+		push_error("StabilityController: Failed to get parent RocketController")
+		return
+
 func process(delta: float):
-	var parent = get_parent() as RocketController
-	if parent.is_on_landing_pad:
-		apply_tipping_forces(delta)
+	# Skip processing if in non-active states
+	if parent.current_state in [parent.State.CRASHED, parent.State.TRANSITIONING]:
+		return
 
-func apply_tipping_forces(delta: float):
-	var parent = get_parent() as RocketController
-	var tilt_angle = get_tilt_angle(parent)
-	if tilt_angle > parent.max_landing_angle and tilt_angle < parent.critical_tipping_angle:
-		var tipping_torque = calculate_tipping_torque(parent, tilt_angle, delta)
-		parent.apply_torque(Vector3(0, 0, tipping_torque))
+	# Calculate current tilt
+	var current_tilt = get_tilt_angle()
+	tilt_changed.emit(current_tilt)
+	
+	# Store tilt in parent for other systems to reference
+	parent.tilt_angle = current_tilt
+	
+	# Check for dangerous tilt situations
+	var is_critically_tilted = current_tilt >= parent.critical_tipping_angle
+	
+	if is_critically_tilted:
+		# Accumulate time spent in dangerous tilt
+		time_since_critical_tilt += delta
+		
+		# Trigger crash if tilted too long
+		if time_since_critical_tilt >= RECOVERY_MAX_TIME:
+			parent.start_crash_sequence()
+	else:
+		# Reset recovery timer when safe
+		time_since_critical_tilt = 0.0
+	
+	was_critically_tilted = is_critically_tilted
 
-func calculate_tipping_torque(parent: RocketController, tilt_angle: float, delta: float) -> float:
-	var right_vector = parent.global_transform.basis.x
-	var tilt_direction = parent.global_transform.basis.y.cross(Vector3.UP)
-	var tilt_factor = (tilt_angle - parent.max_landing_angle) / (parent.critical_tipping_angle - parent.max_landing_angle)
-	var base_factor = 1.0 - (parent.base_stability / (tilt_angle + parent.base_stability))
-	return tilt_direction.dot(right_vector) * parent.tipping_torque_multiplier * tilt_factor * base_factor * delta
-
-func get_tilt_angle(parent: RocketController) -> float:
+func get_tilt_angle() -> float:
 	var up_direction = parent.global_transform.basis.y
 	return rad_to_deg(acos(up_direction.dot(Vector3.UP)))

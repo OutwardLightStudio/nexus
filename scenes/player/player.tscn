@@ -11,33 +11,8 @@
 [ext_resource type="Script" path="res://scenes/player/stability_controller.gd" id="6_jxs5u"]
 [ext_resource type="Script" path="res://scenes/player/landing_controller.gd" id="7_p66tl"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
-[ext_resource type="Script" path="res://scenes/player/recovery_controller.gd" id="8_80706"]
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="8_o0vq7"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_is62b"]
-lifetime_randomness = 0.2
-particle_flag_rotate_y = true
-emission_shape = 1
-emission_sphere_radius = 0.2
-angle_min = 1.07288e-05
-angle_max = 360.0
-direction = Vector3(0, -1, 0)
-spread = 15.0
-initial_velocity_min = 2.0
-initial_velocity_max = 3.0
-gravity = Vector3(0, -0.5, 0)
-scale_min = 0.1
-scale_max = 0.3
-color = Color(0.229069, 0.508497, 0.766997, 1)
-turbulence_enabled = true
-turbulence_noise_strength = 0.2
-turbulence_noise_scale = 2.0
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_kkyn6"]
-material = ExtResource("4_g7o3v")
+[ext_resource type="Script" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
 
@@ -134,7 +109,32 @@ material = SubResource("StandardMaterial3D_82jvj")
 radius = 0.4
 height = 0.8
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("explosion_particles", "success_particles", "booster_particles", "explosion_sound", "success_sound", "bubbles_sound")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_is62b"]
+lifetime_randomness = 0.2
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.1
+scale_max = 0.3
+color = Color(0.229069, 0.508497, 0.766997, 1)
+turbulence_enabled = true
+turbulence_noise_strength = 0.2
+turbulence_noise_scale = 2.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kkyn6"]
+material = ExtResource("4_g7o3v")
+
+[node name="Player" type="RigidBody3D"]
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -144,33 +144,9 @@ linear_damp = 1.0
 angular_damp = 3.0
 script = ExtResource("1_scd23")
 critical_tipping_angle = 53.156
-explosion_particles = NodePath("Effects/ExplosionBubbles")
-success_particles = NodePath("Effects/SuccessBubbles")
-booster_particles = NodePath("Movement/BoosterBubblesCenter")
-explosion_sound = NodePath("Audio/PopAudio")
-success_sound = NodePath("Audio/SuccessAudio")
-bubbles_sound = NodePath("Audio/BubblesAudio")
 
 [node name="Movement" type="Node3D" parent="."]
 script = ExtResource("2_m6058")
-
-[node name="BoosterBubblesRight" type="GPUParticles3D" parent="Movement"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39967, -1.3866, 0)
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_is62b")
-draw_pass_1 = SubResource("SphereMesh_kkyn6")
-
-[node name="BoosterBubblesCenter" type="GPUParticles3D" parent="Movement"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.08897, 0)
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_is62b")
-draw_pass_1 = SubResource("SphereMesh_kkyn6")
-
-[node name="BoosterBubblesLeft" type="GPUParticles3D" parent="Movement"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356287, -1.38724, 0)
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_is62b")
-draw_pass_1 = SubResource("SphereMesh_kkyn6")
 
 [node name="Fuel" type="Node3D" parent="."]
 script = ExtResource("4_qtt7p")
@@ -182,9 +158,6 @@ script = ExtResource("6_jxs5u")
 
 [node name="Landing" type="Node3D" parent="."]
 script = ExtResource("7_p66tl")
-
-[node name="Recovery" type="Node3D" parent="."]
-script = ExtResource("8_80706")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -237,6 +210,7 @@ smoothing_speed = 5.0
 transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 7.53, 12.73)
 
 [node name="Effects" type="Node3D" parent="."]
+script = ExtResource("11_smcew")
 
 [node name="ExplosionBubbles" type="GPUParticles3D" parent="Effects"]
 emitting = false
@@ -259,16 +233,32 @@ trail_lifetime = 2.33
 process_material = SubResource("ParticleProcessMaterial_vrcvt")
 draw_pass_1 = SubResource("SphereMesh_ifw7w")
 
-[node name="Audio" type="Node3D" parent="."]
-
-[node name="BubblesAudio" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="BubblesAudio" type="AudioStreamPlayer3D" parent="Effects"]
 stream = ExtResource("2_05a8e")
 
-[node name="SuccessAudio" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="SuccessAudio" type="AudioStreamPlayer3D" parent="Effects"]
 stream = ExtResource("4_vxola")
 
-[node name="PopAudio" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="Effects"]
 stream = ExtResource("2_mso6s")
 volume_db = 5.162
+
+[node name="BoosterBubblesLeft" type="GPUParticles3D" parent="Effects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356287, -1.38724, 0)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_is62b")
+draw_pass_1 = SubResource("SphereMesh_kkyn6")
+
+[node name="BoosterBubblesCenter" type="GPUParticles3D" parent="Effects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.08897, 0)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_is62b")
+draw_pass_1 = SubResource("SphereMesh_kkyn6")
+
+[node name="BoosterBubblesRight" type="GPUParticles3D" parent="Effects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39967, -1.3866, 0)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_is62b")
+draw_pass_1 = SubResource("SphereMesh_kkyn6")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
