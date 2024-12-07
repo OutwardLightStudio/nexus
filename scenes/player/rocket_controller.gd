@@ -6,7 +6,7 @@ signal crash_ended
 signal level_finished(next_level_path: String)
 signal landing_state_changed(is_on_pad: bool)
 
-enum State { FLYING, LANDING, CRASHED, TRANSITIONING }
+enum State {FLYING, LANDING, CRASHED, TRANSITIONING}
 
 const UP_VECTOR := Vector3.UP
 
@@ -85,7 +85,6 @@ func _physics_process(delta: float):
 	movement.process(delta)
 	stability.process(delta)
 	landing.process(delta)
-	recovery.process(delta)
 
 func _connect_signals():
 	if not crashed.is_connected(_on_crashed):
