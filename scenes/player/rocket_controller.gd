@@ -41,7 +41,7 @@ const UP_VECTOR := Vector3.UP
 @export var max_fuel: float = 100
 @export var fuel_decrease: float = 10
 @export var boost_fuel_cost: float = 30.0
-@export var boost_thrust: float = 3000.0
+@export var boost_thrust: float = 75.0
 @export var boost_duration: float = 0.2
 
 var thrust_active: bool = false
@@ -95,7 +95,6 @@ func _physics_process(delta: float):
 
 func connect_signals():
 	# Fuel signals
-	fuel_controller.fuel_depleted.connect(_on_fuel_depleted)
 	fuel_controller.boost_requested.connect(_on_boost_requested)
 	
 	# Custom rocket signals
@@ -124,16 +123,12 @@ func _on_body_entered(body: Node3D):
 		start_crash_sequence()
 		return
 
-func _on_fuel_depleted():
-	movement.stop_thrust()
-
 func _on_boost_requested():
 	if current_fuel >= boost_fuel_cost:
 		movement.activate_boost()
 
 func _on_crashed():
 	current_state = State.CRASHED
-	movement.stop_thrust()
 	set_process(false)
 	effects.play_explosion()
 
