@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgwnwoltyh7bf"]
+
+[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_qf6u3"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_p7350"]
+[ext_resource type="PackedScene" uid="uid://kalepd6o3gdx" path="res://scenes/environment_test.tscn" id="3_y4yp2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
+albedo_color = Color(0.28975, 0.408702, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev7sl"]
+albedo_color = Color(0, 0.737255, 0.321569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljric"]
+albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2172, 0.1, 0.005)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_340e8")
+
+[node name="LandingPad" type="CSGBox3D" parent="." groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9329, 7.71697, 0)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_ev7sl")
+script = ExtResource("1_qf6u3")
+file_path = "res://levels/level_2.tscn"
+
+[node name="Obstacle" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.234, 4.27634, -0.374578)
+use_collision = true
+size = Vector3(5, 8.52551, 4.69202)
+material = SubResource("StandardMaterial3D_ljric")
+
+[node name="Obstacle2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99149, 10.462, -0.905256)
+use_collision = true
+size = Vector3(5, 10.9307, 4.69202)
+material = SubResource("StandardMaterial3D_ljric")
+
+[node name="Obstacle3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5932, 4.27634, -0.374578)
+use_collision = true
+size = Vector3(5, 8.52551, 4.69202)
+material = SubResource("StandardMaterial3D_ljric")
+
+[node name="Obstacle5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0.000471239, 0, -0.000471239, 1, 0, 0, 0, 1, 19.0309, 6.71196, -0.374578)
+use_collision = true
+size = Vector3(3.78946, 4.00699, 4.69202)
+material = SubResource("StandardMaterial3D_ljric")
+
+[node name="Obstacle4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8357, 10.462, -0.8768)
+use_collision = true
+size = Vector3(5, 10.9307, 4.69202)
+material = SubResource("StandardMaterial3D_ljric")
+
+[node name="Player" parent="." instance=ExtResource("2_p7350")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2172, 1.2, 0.005)
+boost_duration = 0.3
+
+[node name="Floor2" parent="." instance=ExtResource("3_y4yp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308733, -4.00356, -0.527797)
