@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgwnwoltyh7bf"]
+[gd_scene load_steps=7 format=3 uid="uid://ci1r5smh8wjkv"]
 
-[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_qf6u3"]
-[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_p7350"]
-[ext_resource type="PackedScene" uid="uid://kalepd6o3gdx" path="res://scenes/environment_test.tscn" id="3_y4yp2"]
+[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_ow586"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_m7w60"]
+[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://scenes/environment_test.tscn" id="3_abo2c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
@@ -26,7 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9329, 7.71697, 0)
 use_collision = true
 size = Vector3(3, 0.2, 3)
 material = SubResource("StandardMaterial3D_ev7sl")
-script = ExtResource("1_qf6u3")
+script = ExtResource("1_ow586")
 file_path = "res://levels/level_2.tscn"
 
 [node name="Obstacle" type="CSGBox3D" parent="."]
@@ -59,9 +59,9 @@ use_collision = true
 size = Vector3(5, 10.9307, 4.69202)
 material = SubResource("StandardMaterial3D_ljric")
 
-[node name="Player" parent="." instance=ExtResource("2_p7350")]
+[node name="Player" parent="." instance=ExtResource("2_m7w60")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2172, 1.2, 0.005)
 boost_duration = 0.3
 
-[node name="Floor2" parent="." instance=ExtResource("3_y4yp2")]
+[node name="Floor2" parent="." instance=ExtResource("3_abo2c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.308733, -4.00356, -0.527797)
