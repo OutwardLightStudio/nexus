@@ -35,13 +35,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
 
 [node name="MovingHazard" parent="." instance=ExtResource("3_viee3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.14345, 1.8113, 0)
-destination = Vector3(0, 7, 0)
-duration = 3.0
+desired_position = Vector3(0, 8, 0)
 
 [node name="MovingHazard2" parent="." instance=ExtResource("3_viee3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67474, 1.8113, 0)
-destination = Vector3(0, 7, 0)
-duration = 3.0
+desired_position = Vector3(0, 7, 0)
 
 [node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 4.9656, 0.035)
