@@ -27,7 +27,7 @@ use_collision = true
 size = Vector3(3, 0.2, 3)
 material = SubResource("StandardMaterial3D_ev7sl")
 script = ExtResource("1_ow586")
-file_path = "res://levels/level_2.tscn"
+file_path = "res://levels/level_7.tscn"
 
 [node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.234, 4.27634, -0.374578)
