@@ -31,10 +31,9 @@ file_path = "res://levels/level_3.5.tscn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
 
 [node name="MovingHazard" parent="." instance=ExtResource("3_7xwgo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.27485, 1.95837, -0.0074501)
+transform = Transform3D(1, -1.33349e-07, 1.13088e-07, 0, 0.64679, 0.762668, -1.74846e-07, -0.762668, 0.64679, -6.27485, 1.95837, -0.0074501)
 desired_position = Vector3(0, 3, 0)
-desired_rotation = Vector3(0, 90, 0)
-desired_scale = Vector3(3, 1, 1)
-desired_duration = 3.0
+desired_rotation = Vector3(0, 10, 0)
+desired_scale = Vector3(1, 1.5, 1)
 
 [node name="Floor" parent="." instance=ExtResource("4_hpvho")]
