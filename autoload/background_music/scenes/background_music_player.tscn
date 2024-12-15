@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://eo7xhk51lcrl"]
+
+[ext_resource type="Script" path="res://autoload/background_music/scripts/background_music_player.gd" id="1_03df7"]
+[ext_resource type="Script" path="res://autoload/background_music/resources/playlist.gd" id="2_ltb88"]
+[ext_resource type="Script" path="res://autoload/background_music/resources/track.gd" id="3_2w28v"]
+[ext_resource type="AudioStream" uid="uid://bbsklvcfxq3ci" path="res://assets/music/Brylie Christopher Oxley - Kirkkopuisto.mp3" id="4_70oqv"]
+
+[sub_resource type="Resource" id="Resource_0fihg"]
+script = ExtResource("3_2w28v")
+audio_stream = ExtResource("4_70oqv")
+title = "Kirkkopuisto"
+volume_db = 0.0
+pitch_scale = 1.0
+loop = true
+
+[sub_resource type="Resource" id="Resource_7pi40"]
+script = ExtResource("2_ltb88")
+tracks = Array[ExtResource("3_2w28v")]([SubResource("Resource_0fihg")])
+loop_playlist = true
+shuffle_mode = false
+crossfade_duration = 1.0
+default_volume_db = 0.0
+
+[node name="BackgroundMusicPlayer" type="Node"]
+script = ExtResource("1_03df7")
+playlist = SubResource("Resource_7pi40")
+
+[node name="MainPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="CrossfadePlayer" type="AudioStreamPlayer" parent="."]
