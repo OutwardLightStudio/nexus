@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b26o7bm6b1mhq"
+path="res://.godot/imported/Brylie Christopher Oxley - Kirkkopuisto.mp3-f5776d24af498c4cec16a421e62304b2.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Brylie Christopher Oxley - Kirkkopuisto.mp3"
+dest_files=["res://.godot/imported/Brylie Christopher Oxley - Kirkkopuisto.mp3-f5776d24af498c4cec16a421e62304b2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

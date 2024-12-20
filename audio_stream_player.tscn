@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://tpg37ess2a53"]
+
+[ext_resource type="AudioStream" uid="uid://b26o7bm6b1mhq" path="res://assets/music/Brylie Christopher Oxley - Kirkkopuisto.mp3" id="1_7k73d"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_7f8ox"]
+stream_count = 1
+stream_0 = ExtResource("1_7k73d")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamPlaylist_7f8ox")
+autoplay = true
+bus = &"Music"

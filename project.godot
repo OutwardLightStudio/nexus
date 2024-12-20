@@ -15,10 +15,18 @@ run/main_scene="res://levels/level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ProjectMusicController="*res://addons/maaacks_music_controller/base/scenes/Autoloads/ProjectMusicController.tscn"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/maaacks_music_controller/plugin.cfg")
 
 [input]
 
