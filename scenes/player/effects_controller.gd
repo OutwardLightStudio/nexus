@@ -23,7 +23,6 @@ func connect_signals():
 	if parent:
 		parent.crashed.connect(_on_crashed)
 		parent.crash_ended.connect(_on_crash_ended)
-		parent.level_finished.connect(_on_level_finished)
 		parent.landing_state_changed.connect(_on_landing_state_changed)
 		parent.movement.boost_activated.connect(_on_boost_activated)
 
