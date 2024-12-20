@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt3a4ijl0ll2b"]
+[gd_scene load_steps=8 format=3 uid="uid://bt3a4ijl0ll2b"]
 
 [ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://scenes/environment.tscn" id="1_ef00w"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="1_fgnnu"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_oculd"]
+[ext_resource type="AudioStream" uid="uid://b26o7bm6b1mhq" path="res://assets/music/Brylie Christopher Oxley - Kirkkopuisto.mp3" id="4_4bxek"]
+[ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/maaacks_music_controller/base/scenes/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_dgjog"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
@@ -31,3 +33,6 @@ file_path = "res://levels/level_2.tscn"
 [node name="Player" parent="." instance=ExtResource("1_fgnnu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.2, 0.005)
 boost_duration = 0.3
+
+[node name="BackgroundMusicPlayer" parent="." instance=ExtResource("4_dgjog")]
+stream = ExtResource("4_4bxek")
