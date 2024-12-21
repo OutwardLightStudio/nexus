@@ -9,4 +9,4 @@ extends Resource
 @export var default_volume_db: float = 0.0
 
 func _get_resource_name() -> String:
-    return "Background Music Playlist"
+	return "Background Music Playlist"

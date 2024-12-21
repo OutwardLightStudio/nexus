@@ -15,7 +15,7 @@ loop = true
 
 [sub_resource type="Resource" id="Resource_7pi40"]
 script = ExtResource("2_ltb88")
-tracks = Array[ExtResource("3_2w28v")]([SubResource("Resource_0fihg"), null])
+tracks = Array[ExtResource("3_2w28v")]([SubResource("Resource_0fihg")])
 loop_playlist = true
 shuffle_mode = false
 crossfade_duration = 1.0
