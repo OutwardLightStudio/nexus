@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=34 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -32,7 +32,13 @@ top_radius = 0.2
 bottom_radius = 0.2
 height = 1.5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkb4p"]
+emission_enabled = true
+emission = Color(0.821789, 0.821789, 0.821789, 1)
+emission_energy_multiplier = 4.02
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_w3dbl"]
+material = SubResource("StandardMaterial3D_dkb4p")
 top_radius = 0.0
 bottom_radius = 0.2
 height = 0.5
@@ -260,5 +266,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39967, -1.3866, 0)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_is62b")
 draw_pass_1 = SubResource("SphereMesh_kkyn6")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647377, 0)
+omni_range = 50.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,15 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://wxp7o0ne6sct"]
 
+[ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_eaqf3"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_qg6sj"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_ux2uj"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="4_eoyrp"]
-[ext_resource type="PackedScene" uid="uid://dg3wk6whw11fe" path="res://scenes/environment_3.tscn" id="4_n0csa"]
+[ext_resource type="PackedScene" uid="uid://dg3wk6whw11fe" path="res://environments/cave_3.tscn" id="4_n0csa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev7sl"]
-albedo_color = Color(0, 0.737255, 0.321569, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljric"]
 albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
@@ -26,7 +24,7 @@ material = SubResource("StandardMaterial3D_340e8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9329, 7.71697, 0)
 use_collision = true
 size = Vector3(3, 0.2, 3)
-material = SubResource("StandardMaterial3D_ev7sl")
+material = ExtResource("1_eaqf3")
 script = ExtResource("1_qg6sj")
 file_path = "res://levels/level.tscn"
 

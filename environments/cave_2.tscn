@@ -1,22 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://it6majhd2sqd"]
+[gd_scene load_steps=3 format=3 uid="uid://it6majhd2sqd"]
+
+[ext_resource type="PackedScene" uid="uid://np51o35vf0gb" path="res://environments/cave_environment.tscn" id="1_g6y36"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lu2en"]
 albedo_color = Color(0.651085, 0.457377, 0.213907, 1)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_52uv7"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_6u0ce"]
-sky_material = SubResource("ProceduralSkyMaterial_52uv7")
-
-[sub_resource type="Environment" id="Environment_hx1ks"]
-background_mode = 1
-background_color = Color(0.21, 0.15456, 0.0714, 1)
-sky = SubResource("Sky_6u0ce")
-ambient_light_source = 3
-tonemap_mode = 2
-glow_enabled = true
 
 [node name="Floor" type="CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0034647, -4.03332, 0.0347519)
@@ -174,28 +161,4 @@ transform = Transform3D(-0.96709, 0.254433, 0, -0.254433, -0.96709, 0, 0, 0, 1, 
 size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_lu2en")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_hx1ks")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.79804, 0.576556, 0.17526, -0.580197, 0.656577, 0.481952, 0.1628, -0.486302, 0.858491, 0, 0, 0)
-light_energy = 0.5
-shadow_enabled = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.053, 12.7429, 6.82179)
-light_energy = 3.0
-omni_range = 12.0
-omni_attenuation = 0.5
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.33703, 12.7429, 6.82179)
-light_energy = 3.0
-omni_range = 12.0
-omni_attenuation = 0.5
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4231, 12.7429, 6.82179)
-light_energy = 3.0
-omni_range = 12.0
-omni_attenuation = 0.5
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_g6y36")]
