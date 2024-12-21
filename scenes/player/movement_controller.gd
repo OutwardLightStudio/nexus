@@ -55,7 +55,7 @@ func process_rotation(delta: float) -> void:
 	parent.effects.update_rotation_effects(rotation_direction)
 
 # Thrust-related methods
-func apply_thrust_force(delta: float) -> void:
+func apply_thrust_force(_delta: float) -> void:
 	var thrust_force = calculate_dampened_force(
 		parent.thrust,
 		parent.max_velocity,
@@ -81,7 +81,7 @@ func activate_boost() -> void:
 	consume_boost_fuel()
 	boost_activated.emit()
 
-func apply_boost_force(delta: float) -> void:
+func apply_boost_force(_delta: float) -> void:
 	var boost_force = calculate_dampened_force(
 		parent.boost_thrust,
 		parent.max_velocity * 1.5,  # Allow higher speed for boost

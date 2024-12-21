@@ -35,8 +35,8 @@ func process(delta: float):
 		# Accumulate time spent in dangerous tilt
 		time_since_critical_tilt += delta
 		
-		# Trigger crash if tilted too long
-		if time_since_critical_tilt >= RECOVERY_MAX_TIME:
+		# Trigger crash if tilted too long and attempting to land
+		if time_since_critical_tilt >= RECOVERY_MAX_TIME and parent.current_state == parent.State.LANDING:
 			parent.start_crash_sequence()
 	else:
 		# Reset recovery timer when safe
