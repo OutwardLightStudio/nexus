@@ -1,14 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://ci1r5smh8wjkv"]
 
+[ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_3u114"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_ow586"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_m7w60"]
-[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://scenes/environment_test.tscn" id="3_abo2c"]
+[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://environments/cave_2.tscn" id="3_abo2c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ev7sl"]
-albedo_color = Color(0, 0.737255, 0.321569, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljric"]
 albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
@@ -25,7 +23,7 @@ material = SubResource("StandardMaterial3D_340e8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.9329, 7.71697, 0)
 use_collision = true
 size = Vector3(3, 0.2, 3)
-material = SubResource("StandardMaterial3D_ev7sl")
+material = ExtResource("1_3u114")
 script = ExtResource("1_ow586")
 file_path = "res://levels/level_7.tscn"
 

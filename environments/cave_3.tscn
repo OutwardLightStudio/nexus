@@ -1,22 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg3wk6whw11fe"]
+[gd_scene load_steps=3 format=3 uid="uid://dg3wk6whw11fe"]
+
+[ext_resource type="PackedScene" uid="uid://np51o35vf0gb" path="res://environments/cave_environment.tscn" id="1_20tvs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lu2en"]
 albedo_color = Color(0.651085, 0.457377, 0.213907, 1)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_52uv7"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_6u0ce"]
-sky_material = SubResource("ProceduralSkyMaterial_52uv7")
-
-[sub_resource type="Environment" id="Environment_hx1ks"]
-background_mode = 1
-background_color = Color(0.21, 0.15456, 0.0714, 1)
-sky = SubResource("Sky_6u0ce")
-ambient_light_source = 3
-tonemap_mode = 2
-glow_enabled = true
 
 [node name="cave_3" type="Node2D"]
 
@@ -165,32 +152,6 @@ material = SubResource("StandardMaterial3D_lu2en")
 transform = Transform3D(-0.96709, 0.254433, 0, -0.254433, -0.96709, 0, 0, 0, 1, -34.32, 7.76591, 0)
 size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_lu2en")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Floor"]
-environment = SubResource("Environment_hx1ks")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Floor"]
-transform = Transform3D(0.79804, 0.576555, 0.17526, -0.580197, 0.656578, 0.481952, 0.1628, -0.486302, 0.858491, 0, 0, 0)
-light_energy = 0.5
-shadow_enabled = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.053, 12.7429, 6.82179)
-light_energy = 3.0
-omni_range = 12.0
-omni_attenuation = 0.5
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.33703, 12.7429, 6.82179)
-light_energy = 3.0
-omni_range = 12.0
-omni_attenuation = 0.5
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4231, 12.7429, 6.82179)
-light_energy = 3.0
-omni_range = 12.0
-omni_attenuation = 0.5
 
 [node name="Wall12" type="CSGBox3D" parent="Floor"]
 transform = Transform3D(0.0130196, -0.999915, 0, 0.999915, 0.0130196, 0, 0, 0, 1, -8.72705, 33.0318, -7.45058e-09)
@@ -434,3 +395,5 @@ transform = Transform3D(-0.999997, -0.00246094, 0, 0.00246094, -0.999997, 0, 0, 
 light_energy = 3.0
 omni_range = 12.0
 omni_attenuation = 0.5
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_20tvs")]
