@@ -32,7 +32,4 @@ func activate_pad() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	# We only want to respond to the player, and only if we haven't been activated yet
 	if body.is_in_group("player") and not is_activated:
-		# Play our button press animation, which handles both movement and glow
-		animation_player.play("button_press")
-		# Trigger the pad's activation behavior
 		activate_pad()
