@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=30 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -12,7 +12,10 @@
 [ext_resource type="Script" path="res://scenes/player/landing_controller.gd" id="7_p66tl"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="8_o0vq7"]
+[ext_resource type="Material" uid="uid://6fwd7r8tmf8v" path="res://particles/explosion_particles.tres" id="10_xw84m"]
 [ext_resource type="Script" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
+[ext_resource type="Material" uid="uid://xrb2i7caokn4" path="res://particles/success_particles.tres" id="12_msahl"]
+[ext_resource type="Material" uid="uid://b8nvx6ca73y1r" path="res://materials/success_material.tres" id="13_x3ewv"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
 
@@ -54,64 +57,11 @@ top_radius = 0.0
 bottom_radius = 0.15
 height = 0.25
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2kl54"]
-emission_shape = 1
-emission_sphere_radius = 0.5
-angle_min = 1.07288e-05
-angle_max = 353.1
-spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 8.0
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
-gravity = Vector3(0, -0.5, 0)
-scale_min = 0.3
-scale_max = 1.2
-turbulence_enabled = true
-turbulence_noise_strength = 0.5
-turbulence_noise_scale = 2.0
-collision_mode = 1
-collision_friction = 0.3
-collision_bounce = 0.5
-
 [sub_resource type="SphereMesh" id="SphereMesh_ng0vx"]
 material = ExtResource("4_g7o3v")
 
-[sub_resource type="Gradient" id="Gradient_veyk7"]
-offsets = PackedFloat32Array(0.00414938, 0.060166, 0.948133, 0.987552)
-colors = PackedColorArray(0.3, 0.3, 1, 0, 1, 0.136807, 0.812017, 1, 0.887708, 0.862048, 0, 1, 0.3, 0.5, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvel2"]
-gradient = SubResource("Gradient_veyk7")
-
-[sub_resource type="Curve" id="Curve_t8owi"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.314815, 1), -0.0754285, -0.0754285, 0, 0, Vector2(0.842593, 0.973569), -0.150962, -0.150962, 0, 0, Vector2(1, 0.0179856), -5.90124, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_hkuig"]
-curve = SubResource("Curve_t8owi")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vrcvt"]
-lifetime_randomness = 0.33
-emission_shape = 1
-emission_sphere_radius = 0.5
-direction = Vector3(0, 1, 0)
-initial_velocity_min = 2.0
-initial_velocity_max = 3.0
-gravity = Vector3(0, -0.5, 0)
-scale_curve = SubResource("CurveTexture_hkuig")
-color_ramp = SubResource("GradientTexture1D_fvel2")
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82jvj"]
-transparency = 1
-vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 0.7)
-
 [sub_resource type="SphereMesh" id="SphereMesh_ifw7w"]
-material = SubResource("StandardMaterial3D_82jvj")
+material = ExtResource("13_x3ewv")
 radius = 0.4
 height = 0.8
 
@@ -224,7 +174,7 @@ amount = 100
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_2kl54")
+process_material = ExtResource("10_xw84m")
 draw_pass_1 = SubResource("SphereMesh_ng0vx")
 
 [node name="SuccessBubbles" type="GPUParticles3D" parent="Effects"]
@@ -236,7 +186,7 @@ one_shot = true
 explosiveness = 0.85
 randomness = 0.59
 trail_lifetime = 2.33
-process_material = SubResource("ParticleProcessMaterial_vrcvt")
+process_material = ExtResource("12_msahl")
 draw_pass_1 = SubResource("SphereMesh_ifw7w")
 
 [node name="BubblesAudio" type="AudioStreamPlayer3D" parent="Effects"]

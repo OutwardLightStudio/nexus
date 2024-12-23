@@ -1,0 +1,29 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://xrb2i7caokn4"]
+
+[sub_resource type="Gradient" id="Gradient_veyk7"]
+offsets = PackedFloat32Array(0.00414938, 0.060166, 0.948133, 0.987552)
+colors = PackedColorArray(0.3, 0.3, 1, 0, 1, 0.136807, 0.812017, 1, 0.887708, 0.862048, 0, 1, 0.3, 0.5, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvel2"]
+gradient = SubResource("Gradient_veyk7")
+
+[sub_resource type="Curve" id="Curve_t8owi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.314815, 1), -0.0754285, -0.0754285, 0, 0, Vector2(0.842593, 0.973569), -0.150962, -0.150962, 0, 0, Vector2(1, 0.0179856), -5.90124, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hkuig"]
+curve = SubResource("Curve_t8owi")
+
+[resource]
+lifetime_randomness = 0.33
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, -0.5, 0)
+scale_curve = SubResource("CurveTexture_hkuig")
+color_ramp = SubResource("GradientTexture1D_fvel2")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
