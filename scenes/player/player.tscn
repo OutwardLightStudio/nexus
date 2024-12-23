@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=29 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -16,8 +16,6 @@
 [ext_resource type="Script" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
 [ext_resource type="Material" uid="uid://xrb2i7caokn4" path="res://particles/success_particles.tres" id="12_msahl"]
 [ext_resource type="Material" uid="uid://b8nvx6ca73y1r" path="res://materials/success_material.tres" id="13_x3ewv"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_6iyt0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sg736"]
 height = 1.2
@@ -90,7 +88,7 @@ collision_bounce = 0.0
 [sub_resource type="SphereMesh" id="SphereMesh_kkyn6"]
 material = ExtResource("4_g7o3v")
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="RigidBody3D" groups=["player"]]
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -114,10 +112,6 @@ script = ExtResource("6_jxs5u")
 
 [node name="Landing" type="Node3D" parent="."]
 script = ExtResource("7_p66tl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CylinderMesh_6iyt0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.603185, 0)
@@ -177,7 +171,7 @@ explosiveness = 1.0
 process_material = ExtResource("10_xw84m")
 draw_pass_1 = SubResource("SphereMesh_ng0vx")
 
-[node name="SuccessBubbles" type="GPUParticles3D" parent="Effects"]
+[node name="SuccessBubbles" type="GPUParticles3D" parent="Effects" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276196, 0)
 emitting = false
 amount = 33

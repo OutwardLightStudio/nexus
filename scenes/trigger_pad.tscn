@@ -1,22 +1,168 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwwd8ds1by6v4"]
+[gd_scene load_steps=9 format=3 uid="uid://bwwd8ds1by6v4"]
 
 [ext_resource type="Script" path="res://scenes/trigger_pad.gd" id="1_o7bu2"]
+[ext_resource type="Material" uid="uid://csggbqe2iccur" path="res://materials/trigger_button_material.tres" id="2_v53y0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ska"]
-albedo_color = Color(0, 0.435682, 0.0116695, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_dhi3p"]
+size = Vector3(3.2, 0.4, 3.2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_w0318"]
-material = SubResource("StandardMaterial3D_s8ska")
-size = Vector3(3, 0.2, 3)
+[sub_resource type="BoxMesh" id="BoxMesh_5uo1j"]
+material = ExtResource("2_v53y0")
+size = Vector3(3, 0.4, 3)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wfkeg"]
-data = PackedVector3Array(-0.5, 0.05, 0.5, 0.5, 0.05, 0.5, -0.5, -0.05, 0.5, 0.5, 0.05, 0.5, 0.5, -0.05, 0.5, -0.5, -0.05, 0.5, 0.5, 0.05, -0.5, -0.5, 0.05, -0.5, 0.5, -0.05, -0.5, -0.5, 0.05, -0.5, -0.5, -0.05, -0.5, 0.5, -0.05, -0.5, 0.5, 0.05, 0.5, 0.5, 0.05, -0.5, 0.5, -0.05, 0.5, 0.5, 0.05, -0.5, 0.5, -0.05, -0.5, 0.5, -0.05, 0.5, -0.5, 0.05, -0.5, -0.5, 0.05, 0.5, -0.5, -0.05, -0.5, -0.5, 0.05, 0.5, -0.5, -0.05, 0.5, -0.5, -0.05, -0.5, 0.5, 0.05, 0.5, -0.5, 0.05, 0.5, 0.5, 0.05, -0.5, -0.5, 0.05, 0.5, -0.5, 0.05, -0.5, 0.5, 0.05, -0.5, -0.5, -0.05, 0.5, 0.5, -0.05, 0.5, -0.5, -0.05, -0.5, 0.5, -0.05, 0.5, 0.5, -0.05, -0.5, -0.5, -0.05, -0.5)
+[sub_resource type="Animation" id="Animation_hu8ms"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonMesh:mesh:material:emission_energy_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ButtonMesh:mesh:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 0.4, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ButtonMesh:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StaticBody3D/CollisionShape3D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 0.4, 3)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaticBody3D/CollisionShape3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[node name="TriggerPad" type="StaticBody3D"]
+[sub_resource type="Animation" id="Animation_2mvwi"]
+resource_name = "button_press"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ButtonMesh:mesh:material:emission_energy_multiplier")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [0.5, 3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ButtonMesh:mesh:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(3, 0.4, 3), Vector3(3, 0.2, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ButtonMesh:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StaticBody3D/CollisionShape3D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3, 0.4, 3), Vector3(3, 0.2, 3)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StaticBody3D/CollisionShape3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aoc51"]
+_data = {
+"RESET": SubResource("Animation_hu8ms"),
+"button_press": SubResource("Animation_2mvwi")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w8qy3"]
+size = Vector3(3, 0.4, 3)
+
+[node name="TriggerPad" type="Area3D"]
 script = ExtResource("1_o7bu2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_w0318")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConcavePolygonShape3D_wfkeg")
+shape = SubResource("BoxShape3D_dhi3p")
+
+[node name="ButtonMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5uo1j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aoc51")
+}
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_w8qy3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
