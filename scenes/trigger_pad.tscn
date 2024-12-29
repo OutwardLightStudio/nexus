@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/trigger_pad.gd" id="1_o7bu2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ska"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6y1lt"]
 albedo_color = Color(0, 0.435682, 0.0116695, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w0318"]
-material = SubResource("StandardMaterial3D_s8ska")
+material = SubResource("StandardMaterial3D_6y1lt")
 size = Vector3(3, 0.2, 3)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wfkeg"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwivci11c4qe8"]
+
+[ext_resource type="Script" path="res://refueling_pad.gd" id="1_6wxl3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ska"]
+albedo_color = Color(0, 0.435682, 0.0116695, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_opfyj"]
+material = SubResource("StandardMaterial3D_s8ska")
+size = Vector3(3, 0.2, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rn22e"]
+
+[node name="refueling_pad" type="StaticBody3D"]
+script = ExtResource("1_6wxl3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_opfyj")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(3, 0, 0, 0, 0.2, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("BoxShape3D_rn22e")
