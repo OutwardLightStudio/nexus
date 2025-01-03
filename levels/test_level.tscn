@@ -36,5 +36,5 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.5632
 open_distance = 6.0
 
 [node name="TriggerPad" parent="." instance=ExtResource("4_av7qf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26458, 0.109495, 0.555734)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26458, 0.245717, 0.555734)
 controlled_door_path = NodePath("../SlidingDoor")
