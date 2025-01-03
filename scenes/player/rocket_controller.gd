@@ -3,7 +3,6 @@ class_name RocketController
 
 signal crashed
 signal crash_ended
-signal level_finished(next_level_path: String)
 signal landing_state_changed(is_on_pad: bool)
 
 enum State { FLYING, LANDING, CRASHED, TRANSITIONING }
@@ -85,7 +84,7 @@ func connect_signals():
 	# Custom rocket signals
 	crashed.connect(_on_crashed)
 	crash_ended.connect(_on_crash_ended)
-	level_finished.connect(_on_level_finished)
+	landing.successful_landing.connect(_on_successful_landing)
 	landing_state_changed.connect(_on_landing_state_changed)
 	
 func _on_body_entered(body: Node3D):
@@ -123,15 +122,6 @@ func _on_crash_ended():
 func _on_tilt_changed(tilt: float):
 	tilt_angle = tilt
 
-func _on_level_finished(next_level_path: String):
-	current_state = State.TRANSITIONING
-	set_process(false)
-	effects.play_success_particles()
-	effects.play_success_sound()
-	var tween = create_tween()
-	tween.tween_interval(2)
-	tween.tween_callback(func(): get_tree().change_scene_to_file(next_level_path))
-
 func _on_landing_state_changed(on_pad: bool):
 	if not on_pad:
 		current_stable_time = 0.0
@@ -149,3 +139,20 @@ func activate_boost():
 	current_fuel = clamp(current_fuel, 0.0, max_fuel)
 	boosting = true
 	boost_timer = boost_duration
+
+func _on_successful_landing():
+	var landing_pad = landing.get_landing_pad()
+	if landing_pad and landing_pad.has_method("get_next_level_path"):
+		var next_level = landing_pad.get_next_level_path()
+		if not next_level.is_empty():
+			transition_to_next_level(next_level)
+
+
+func transition_to_next_level(next_level_path: String):
+	current_state = State.TRANSITIONING
+	set_process(false)
+	effects.play_success_particles()
+	effects.play_success_sound()
+	var tween = create_tween()
+	tween.tween_interval(2)
+	tween.tween_callback(func(): get_tree().change_scene_to_file(next_level_path))

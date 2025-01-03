@@ -1,0 +1,87 @@
+[gd_resource type="StandardMaterial3D" load_steps=9 format=3 uid="uid://hidwjxe5s765"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ch1jq"]
+noise_type = 2
+frequency = 0.0003
+fractal_type = 2
+fractal_lacunarity = 2.5
+fractal_gain = 0.7
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_amplitude = 45.0
+domain_warp_frequency = 0.0008
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_52p1h"]
+width = 2048
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_ch1jq")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_detail"]
+noise_type = 2
+frequency = 0.001
+fractal_type = 2
+fractal_octaves = 6
+fractal_lacunarity = 2.8
+domain_warp_enabled = true
+domain_warp_amplitude = 20.0
+domain_warp_frequency = 0.001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_detail"]
+width = 2048
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_detail")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_normal"]
+noise_type = 2
+frequency = 0.0005
+fractal_type = 2
+fractal_gain = 0.6
+domain_warp_enabled = true
+domain_warp_amplitude = 35.0
+domain_warp_frequency = 0.0007
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_normal"]
+width = 2048
+height = 2048
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_normal")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rough"]
+noise_type = 2
+frequency = 0.001
+fractal_type = 2
+fractal_octaves = 4
+fractal_lacunarity = 2.5
+domain_warp_enabled = true
+domain_warp_amplitude = 25.0
+domain_warp_frequency = 0.0009
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rough"]
+width = 2048
+height = 2048
+seamless = true
+noise = SubResource("FastNoiseLite_rough")
+
+[resource]
+albedo_color = Color(0.35, 0.32, 0.3, 1)
+albedo_texture = SubResource("NoiseTexture2D_52p1h")
+metallic = 0.1
+metallic_texture = SubResource("NoiseTexture2D_detail")
+metallic_texture_channel = 1
+roughness = 0.85
+roughness_texture = SubResource("NoiseTexture2D_rough")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = SubResource("NoiseTexture2D_normal")
+heightmap_enabled = true
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = SubResource("NoiseTexture2D_52p1h")
+uv1_scale = Vector3(0.17, 0.19, 0.18)
+uv1_triplanar = true
+uv1_world_triplanar = true

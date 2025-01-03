@@ -47,12 +47,8 @@ func handle_successful_landing():
 
 	if landing_pad is TriggerPad:
 		landing_pad.activate_pad()
-
-	if landing_pad.has_method("get_next_level_path"):
-		var next_level = landing_pad.get_next_level_path()
-		if not next_level.is_empty():
-			parent.level_finished.emit(next_level)
-			successful_landing.emit()
+		
+	successful_landing.emit()
 
 func is_landing_stable() -> bool:
 	var current_velocity = parent.linear_velocity.length()
