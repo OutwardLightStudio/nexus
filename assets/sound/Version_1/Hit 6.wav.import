@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b87j7is5oqea1"
+path="res://.godot/imported/Hit 6.wav-02552958b5013402661d1d7fc512e27e.sample"
+
+[deps]
+
+source_file="res://assets/sound/Version_1/Hit 6.wav"
+dest_files=["res://.godot/imported/Hit 6.wav-02552958b5013402661d1d7fc512e27e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
