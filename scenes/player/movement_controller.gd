@@ -5,7 +5,6 @@ signal boost_activated
 
 @onready var parent: RocketController = get_parent() as RocketController
 @onready var e_button = get_parent().get_node("E_button")
-
 @export var boost_cooldown_duration: float = 1.0
 
 # Boost-related state
@@ -76,12 +75,12 @@ func apply_thrust_force(_delta: float) -> void:
 func update_boost_cooldown(delta: float) -> void:
 	print("Boost cooldown timer:", boost_cooldown_timer, "Boost enabled:", boost_enabled)
 	if not boost_enabled:
-		boost_cooldown_timer = boost_cooldown_duration
 		boost_cooldown_timer -= delta
 		if boost_cooldown_timer <= 0:
 			boost_cooldown_timer = 0.0
 			boost_enabled = true
 			e_button.visible = true
+
 
 # Boost-related methods
 func can_activate_boost() -> bool:
@@ -98,6 +97,7 @@ func activate_boost() -> void:
 	boost_enabled = false
 	e_button.visible = false
 	boost_timer = parent.boost_duration
+	boost_cooldown_timer = boost_cooldown_duration
 	
 	consume_boost_fuel()
 	boost_activated.emit()
