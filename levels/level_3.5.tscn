@@ -14,7 +14,7 @@ albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
 
-[node name="Level" type="Node3D"]
+[node name="Level2" type="Node3D"]
 
 [node name="Obstacle" type="CSGBox3D" parent="."]
 transform = Transform3D(5.78315e-16, -2.74487e-08, 3.0067, -0.302674, -2.74487e-08, 0, 1.32303e-08, -0.627953, -1.31427e-07, 2.03642, 8.43843, 0.0264051)
