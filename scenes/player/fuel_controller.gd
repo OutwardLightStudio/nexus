@@ -5,7 +5,7 @@ class_name FuelController
 signal fuel_depleted
 signal boost_fuel_consumed  # Signal for when boost fuel is consumed
 
-@onready var fuel_gauge: Node2D = $FuelGauge
+
 @onready var fuel_slider: TextureProgressBar = $FuelSlider
 @onready var parent: RocketController = get_parent() as RocketController
 

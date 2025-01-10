@@ -71,18 +71,14 @@ func _ready():
 	fuel_controller.setup_fuel(max_fuel, current_fuel)
 	effects.get_node("BubblesAudio").playing = false
 	stability.tilt_changed.connect(_on_tilt_changed)
-	e_button.visible = true
+	
 	
 
 func _process(delta: float):
 	fuel_controller.process(delta)  # Fuel usage checks here
 
 func _physics_process(delta: float):
-	if boost_cooldown_timer > 0:
-		boost_cooldown_timer -= delta
-		if boost_cooldown_timer <= 0:
-			boost_enabled = true
-			e_button.visible = true
+
 	if current_state in [State.TRANSITIONING, State.CRASHED]:
 		return
 		
@@ -146,20 +142,15 @@ func start_crash_sequence():
 	tween.tween_interval(2.5)
 	tween.tween_callback(func(): crash_ended.emit())
 
-func activate_boost():
-	print("Boost cooldown timer:", boost_cooldown_timer)
-	if boost_enabled:		
-		current_fuel -= boost_fuel_cost
-		current_fuel = clamp(current_fuel, 0.0, max_fuel)
-		boosting = true
-		boost_timer = boost_duration
-		boost_cooldown_timer = boost_cooldown_duration
-		print("Boost cooldown timer:", boost_cooldown_timer)
-		print("Boost enabled:", boost_enabled)
-		boost_enabled = false
-		e_button.visible = false
-		print("Boost cooldown timer:", boost_cooldown_timer)
-		print("Boost enabled:", boost_enabled)
+func activate_boost():		
+	current_fuel -= boost_fuel_cost
+	current_fuel = clamp(current_fuel, 0.0, max_fuel)
+	boosting = true
+	boost_timer = boost_duration
+	boost_cooldown_timer = boost_cooldown_duration
+	boost_enabled = false
+	e_button.visible = false
+
 
 func _on_successful_landing():
 	var landing_pad = landing.get_landing_pad()

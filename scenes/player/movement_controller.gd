@@ -4,14 +4,21 @@ class_name MovementController
 signal boost_activated
 
 @onready var parent: RocketController = get_parent() as RocketController
+@onready var e_button = get_parent().get_node("E_button")
+
+@export var boost_cooldown_duration: float = 1.0
 
 # Boost-related state
 var boost_timer: float = 0.0
 var is_boost_active: bool = false
+var boost_cooldown_timer: float = 0.0
+var boost_enabled: bool = false
 
 func _ready() -> void:
 	await get_tree().process_frame
 	connect_signals()
+	set_process(true)
+	e_button.visible = true
 
 func connect_signals() -> void:
 	if parent and parent.fuel_controller:
@@ -21,10 +28,11 @@ func connect_signals() -> void:
 func process(delta: float) -> void:
 	if parent.current_state in [parent.State.CRASHED, parent.State.TRANSITIONING]:
 		return
-	
+		
 	process_thrust(delta)
 	process_boost(delta)
 	process_rotation(delta)
+	update_boost_cooldown(delta)
 
 # Primary movement processing methods
 func process_thrust(delta: float) -> void:
@@ -64,6 +72,16 @@ func apply_thrust_force(_delta: float) -> void:
 	
 	apply_force(thrust_force)
 	parent.thrust_active = true
+	
+func update_boost_cooldown(delta: float) -> void:
+	print("Boost cooldown timer:", boost_cooldown_timer, "Boost enabled:", boost_enabled)
+	if not boost_enabled:
+		boost_cooldown_timer = boost_cooldown_duration
+		boost_cooldown_timer -= delta
+		if boost_cooldown_timer <= 0:
+			boost_cooldown_timer = 0.0
+			boost_enabled = true
+			e_button.visible = true
 
 # Boost-related methods
 func can_activate_boost() -> bool:
@@ -71,11 +89,14 @@ func can_activate_boost() -> bool:
 		parent.current_fuel >= parent.boost_fuel_cost
 		and not is_boost_active
 		and not parent.is_thrusting
+		and boost_enabled
 	)
 
 func activate_boost() -> void:
 	is_boost_active = true
 	parent.boosting = true
+	boost_enabled = false
+	e_button.visible = false
 	boost_timer = parent.boost_duration
 	
 	consume_boost_fuel()

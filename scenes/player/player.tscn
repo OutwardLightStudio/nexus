@@ -121,8 +121,6 @@ script = ExtResource("6_jxs5u")
 [node name="Landing" type="Node3D" parent="."]
 script = ExtResource("7_p66tl")
 
-[node name="E_button" parent="." instance=ExtResource("7_0w6d2")]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.603185, 0)
 shape = SubResource("CylinderShape3D_sg736")
@@ -236,5 +234,7 @@ skeleton = NodePath("../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.73207)
+
+[node name="E_button" parent="." instance=ExtResource("7_0w6d2")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
