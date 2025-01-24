@@ -4,28 +4,28 @@
 [ext_resource type="PackedScene" uid="uid://np51o35vf0gb" path="res://environments/cave_environment.tscn" id="2_qj6y5"]
 
 [node name="Cave" type="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0034647, -4.03332, 0.0347519)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4017, -4.03332, 0.0347519)
 use_collision = true
-size = Vector3(38, 8, 5)
+size = Vector3(66.8104, 8, 5)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall" type="CSGBox3D" parent="."]
-transform = Transform3D(0.931647, 0.363365, 0, -0.363365, 0.931647, 0, 0, 0, 1, 18.4038, 7.24819, 0)
+transform = Transform3D(0.931647, 0.363365, 0, -0.363365, 0.931647, 0, 0, 0, 1, 32.9105, 7.24819, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall2" type="CSGBox3D" parent="."]
-transform = Transform3D(0.895051, -0.445964, 0, 0.445964, 0.895051, 0, 0, 0, 1, 18.3969, 15.2753, 0)
+transform = Transform3D(0.895051, -0.445964, 0, 0.445964, 0.895051, 0, 0, 0, 1, 32.9036, 15.2753, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall3" type="CSGBox3D" parent="."]
-transform = Transform3D(0.523347, -0.85212, 0, 0.85212, 0.523347, 0, 0, 0, 1, 13.1181, 20.5166, 0)
+transform = Transform3D(0.523347, -0.85212, 0, 0.85212, 0.523347, 0, 0, 0, 1, 27.6248, 20.5166, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall4" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.100518, -0.994935, 0, 0.994935, -0.100518, 0, 0, 0, 1, 6.32474, 21.4768, 0)
+transform = Transform3D(-0.100518, -0.994935, 0, 0.994935, -0.100518, 0, 0, 0, 1, 20.8315, 21.4768, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
@@ -65,22 +65,22 @@ size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall5" type="CSGBox3D" parent="."]
-transform = Transform3D(0.214002, -0.976833, 0, 0.976833, 0.214002, 0, 0, 0, 1, -2.81858, 20.749, 0)
+transform = Transform3D(0.214002, -0.976833, 0, 0.976833, 0.214002, 0, 0, 0, 1, -17.229, 20.749, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall6" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.373069, -0.927804, 0, 0.927804, -0.373069, 0, 0, 0, 1, -11.6029, 20.2963, 0)
+transform = Transform3D(-0.373069, -0.927804, 0, 0.927804, -0.373069, 0, 0, 0, 1, -26.0133, 20.2963, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall7" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.898825, -0.438308, 0, 0.438308, -0.898825, 0, 0, 0, 1, -15.7324, 14.8444, 0)
+transform = Transform3D(-0.898825, -0.438308, 0, 0.438308, -0.898825, 0, 0, 0, 1, -30.1428, 14.8444, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
 [node name="Wall8" type="CSGBox3D" parent="."]
-transform = Transform3D(-0.96709, 0.254433, 0, -0.254433, -0.96709, 0, 0, 0, 1, -17.798, 7.76591, 0)
+transform = Transform3D(-0.96709, 0.254433, 0, -0.254433, -0.96709, 0, 0, 0, 1, -32.2084, 7.76591, 0)
 size = Vector3(4, 10, 4)
 material = ExtResource("1_vtt8p")
 
