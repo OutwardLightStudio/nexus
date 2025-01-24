@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2onjlci8h2fr"]
+
+[ext_resource type="Material" uid="uid://hidwjxe5s765" path="res://materials/cave_surface.tres" id="1_vtt8p"]
+[ext_resource type="PackedScene" uid="uid://np51o35vf0gb" path="res://environments/cave_environment.tscn" id="2_qj6y5"]
+
+[node name="Cave" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0034647, -4.03332, 0.0347519)
+use_collision = true
+size = Vector3(38, 8, 5)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(0.931647, 0.363365, 0, -0.363365, 0.931647, 0, 0, 0, 1, 18.4038, 7.24819, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.895051, -0.445964, 0, 0.445964, 0.895051, 0, 0, 0, 1, 18.3969, 15.2753, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.523347, -0.85212, 0, 0.85212, 0.523347, 0, 0, 0, 1, 13.1181, 20.5166, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.100518, -0.994935, 0, 0.994935, -0.100518, 0, 0, 0, 1, 6.32474, 21.4768, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall9" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.871721, -0.313822, 0.376321, 0.263136, -0.947675, -0.180749, 0.413353, -0.058539, 0.908687, 5.92911, 16.4115, -3.9279)
+size = Vector3(4, 12.5214, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall10" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.957405, 0.190958, 0.216588, -0.172805, -0.979862, 0.100041, 0.23133, 0.0583524, 0.971124, -3.66898, 16.0442, -4.36404)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall11" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.950043, 0.299436, -0.0880758, -0.309687, -0.939493, 0.146446, -0.0388956, 0.166406, 0.98529, -10.1951, 16.0442, -4.61152)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall12" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.888481, 0.340782, 0.307358, -0.234156, -0.91265, 0.335024, 0.39468, 0.225693, 0.890668, 12.3936, 4.44491, -5.08998)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall13" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.891087, -0.142338, 0.430934, 0.224035, -0.963744, 0.144934, 0.39468, 0.225693, 0.890668, 6.08002, 4.44491, -5.08998)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall14" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.603644, 0.302127, 0.737789, -0.117455, -0.949017, 0.292526, 0.788555, 0.0899247, 0.608355, -0.869764, 4.44491, -5.08998)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall15" type="CSGBox3D" parent="."]
+transform = Transform3D(0.0614604, 0.0988554, 0.993202, -0.0234475, -0.994666, 0.100452, 0.997835, -0.0294619, -0.0588148, -10.2177, 4.93433, -4.38054)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall5" type="CSGBox3D" parent="."]
+transform = Transform3D(0.214002, -0.976833, 0, 0.976833, 0.214002, 0, 0, 0, 1, -2.81858, 20.749, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall6" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.373069, -0.927804, 0, 0.927804, -0.373069, 0, 0, 0, 1, -11.6029, 20.2963, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall7" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.898825, -0.438308, 0, 0.438308, -0.898825, 0, 0, 0, 1, -15.7324, 14.8444, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="Wall8" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.96709, 0.254433, 0, -0.254433, -0.96709, 0, 0, 0, 1, -17.798, 7.76591, 0)
+size = Vector3(4, 10, 4)
+material = ExtResource("1_vtt8p")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_qj6y5")]
