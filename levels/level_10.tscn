@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_20xue"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_qcri4"]
-[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://scenes/environment_test.tscn" id="3_cvm7e"]
+[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://environments/cave_2.tscn" id="3_cvm7e"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="4_hlgjm"]
 [ext_resource type="PackedScene" uid="uid://7e87dwxuo4u2" path="res://scenes/sliding_door.tscn" id="7_tpcfo"]
 [ext_resource type="PackedScene" uid="uid://bwwd8ds1by6v4" path="res://scenes/trigger_pad.tscn" id="8_8on0t"]

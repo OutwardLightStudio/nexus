@@ -32,7 +32,9 @@ const UP_VECTOR := Vector3.UP
 @export var boost_fuel_cost: float = 30.0
 @export var boost_thrust: float = 75.0
 @export var boost_duration: float = 0.2
+@export var boost_cooldown_duration: float = 1.0
 
+var boost_enabled: bool = false
 var thrust_active: bool = false
 var is_thrusting: bool = false:
 	set(value):
@@ -42,6 +44,7 @@ var is_thrusting: bool = false:
 var current_fuel: float = max_fuel
 var boosting: bool = false
 var boost_timer: float = 0.0
+var boost_cooldown_timer: float = 0.0
 
 var current_state: State = State.FLYING
 var current_stable_time: float = 0.0
@@ -60,7 +63,7 @@ var tilt_angle: float = 0.0
 @onready var stability = $Stability
 @onready var landing = $Landing
 @onready var effects = $Effects
-
+@onready var e_button = $E_button
 
 func _ready():
 	await get_tree().process_frame  # Ensure children are ready
@@ -68,17 +71,22 @@ func _ready():
 	fuel_controller.setup_fuel(max_fuel, current_fuel)
 	effects.get_node("BubblesAudio").playing = false
 	stability.tilt_changed.connect(_on_tilt_changed)
+	
+	
 
 func _process(delta: float):
 	fuel_controller.process(delta)  # Fuel usage checks here
 
 func _physics_process(delta: float):
+
 	if current_state in [State.TRANSITIONING, State.CRASHED]:
 		return
-
+		
 	movement.process(delta)
 	stability.process(delta)
 	landing.process(delta)
+
+	
 
 func connect_signals():
 	# Custom rocket signals
@@ -134,11 +142,15 @@ func start_crash_sequence():
 	tween.tween_interval(2.5)
 	tween.tween_callback(func(): crash_ended.emit())
 
-func activate_boost():
+func activate_boost():		
 	current_fuel -= boost_fuel_cost
 	current_fuel = clamp(current_fuel, 0.0, max_fuel)
 	boosting = true
 	boost_timer = boost_duration
+	boost_cooldown_timer = boost_cooldown_duration
+	boost_enabled = false
+	e_button.visible = false
+
 
 func _on_successful_landing():
 	var landing_pad = landing.get_landing_pad()
