@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwwd8ds1by6v4"]
 
 [ext_resource type="Script" path="res://scenes/trigger_pad.gd" id="1_o7bu2"]
-[ext_resource type="Material" uid="uid://csggbqe2iccur" path="res://materials/trigger_button_material.tres" id="2_v53y0"]
+[ext_resource type="Material" uid="uid://cvmemsmtpuply" path="res://materials/trigger_button_material.tres" id="2_v53y0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dhi3p"]
 size = Vector3(3.2, 0.4, 3.2)
