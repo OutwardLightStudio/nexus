@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=31 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://cpqrd0jhqcnfe" path="res://particles/bubble_particles.tres" id="4_g7o3v"]
 [ext_resource type="Script" path="res://scenes/player/fuel_controller.gd" id="4_qtt7p"]
 [ext_resource type="AudioStream" uid="uid://evbgf785fj5w" path="res://assets/sound/success.mp3" id="4_vxola"]
+[ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="5_sbef4"]
 [ext_resource type="Script" path="res://scenes/player/stability_controller.gd" id="6_jxs5u"]
 [ext_resource type="Script" path="res://scenes/player/landing_controller.gd" id="7_p66tl"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
@@ -106,6 +107,11 @@ script = ExtResource("2_m6058")
 script = ExtResource("4_qtt7p")
 
 [node name="FuelSlider" parent="Fuel" instance=ExtResource("8_o0vq7")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Fuel"]
+position = Vector2(107, 685)
+scale = Vector2(5, 5)
+texture = ExtResource("5_sbef4")
 
 [node name="Stability" type="Node3D" parent="."]
 script = ExtResource("6_jxs5u")
