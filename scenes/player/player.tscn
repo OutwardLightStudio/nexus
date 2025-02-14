@@ -109,9 +109,10 @@ script = ExtResource("2_m6058")
 script = ExtResource("4_qtt7p")
 
 [node name="FuelSlider" parent="Fuel" instance=ExtResource("8_o0vq7")]
-offset_top = 446.0
-offset_right = 142.0
-offset_bottom = 751.0
+offset_left = 62.0
+offset_top = 99.0
+offset_right = 127.0
+offset_bottom = 404.0
 size_flags_horizontal = 0
 script = null
 
