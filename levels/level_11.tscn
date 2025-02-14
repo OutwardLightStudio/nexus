@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_ux2uj"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="4_eoyrp"]
 [ext_resource type="PackedScene" uid="uid://dg3wk6whw11fe" path="res://environments/cave_3.tscn" id="4_n0csa"]
-[ext_resource type="PackedScene" uid="uid://dke233bj6pxqx" path="res://pointer.tscn" id="6_uk8og"]
 [ext_resource type="Script" path="res://bat_movement.gd" id="7_k2m4p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
