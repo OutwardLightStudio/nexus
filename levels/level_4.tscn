@@ -2,9 +2,10 @@
 
 [ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_hd14w"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_ww52m"]
-[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_0w0kj"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://player/player.tscn" id="2_0w0kj"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="3_viee3"]
 [ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://environments/cave_1.tscn" id="4_42ie1"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)

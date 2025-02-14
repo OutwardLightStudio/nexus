@@ -2,11 +2,11 @@
 
 [ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_eaqf3"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_qg6sj"]
-[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_ux2uj"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://player/player.tscn" id="2_ux2uj"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="4_eoyrp"]
 [ext_resource type="PackedScene" uid="uid://dg3wk6whw11fe" path="res://environments/cave_3.tscn" id="4_n0csa"]
-[ext_resource type="Script" path="res://bat_enemy/bat_movement.gd" id="6_bbvrs"]
-[ext_resource type="PackedScene" uid="uid://buvwk2y4l40gj" path="res://bat_enemy/better_bat.tscn" id="6_mhn8n"]
+[ext_resource type="Script" path="res://scenes/bat_enemy/bat_movement.gd" id="6_bbvrs"]
+[ext_resource type="PackedScene" uid="uid://buvwk2y4l40gj" path="res://scenes/bat_enemy/better_bat.tscn" id="6_mhn8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
