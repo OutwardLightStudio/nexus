@@ -1,17 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://wxp7o0ne6sct"]
+[gd_scene load_steps=11 format=3 uid="uid://wxp7o0ne6sct"]
 
 [ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_eaqf3"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_qg6sj"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_ux2uj"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="4_eoyrp"]
 [ext_resource type="PackedScene" uid="uid://dg3wk6whw11fe" path="res://environments/cave_3.tscn" id="4_n0csa"]
-[ext_resource type="Script" path="res://bat_movement.gd" id="7_k2m4p"]
+[ext_resource type="Script" path="res://bat_enemy/bat_movement.gd" id="6_bbvrs"]
+[ext_resource type="PackedScene" uid="uid://buvwk2y4l40gj" path="res://bat_enemy/better_bat.tscn" id="6_mhn8n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljric"]
 albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_path"]
+_data = {
+"points": PackedVector3Array(0, 2, 0, 0, -2, 0, -8, 0, 0, -2, 0, 0, 2, 0, 0, 0, 4, 0, -2, 0, 0, 2, 0, 0, 8, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
 
 [node name="Level2" type="Node3D"]
 
@@ -62,9 +70,12 @@ transform_duration = 2.0
 
 [node name="cave_3" parent="." instance=ExtResource("4_n0csa")]
 
-[node name="Path2" parent="." instance=ExtResource("6_uk8og")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8044, 10.029)
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8044, 1.78325)
+curve = SubResource("Curve3D_path")
 
-[node name="PathFollow3D2" type="PathFollow3D" parent="Path2"]
-transform = Transform3D(-0.0310584, -0.100789, -0.994422, 0, 0.994903, -0.100837, 0.999518, -0.00313185, -0.0309, -4.26691, 1.74973, -1.17704)
-script = ExtResource("7_k2m4p")
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(7.54979e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, -7.54979e-08, -3.30012e-15, -8, 0, 0)
+script = ExtResource("6_bbvrs")
+
+[node name="Bat2" parent="Path3D/PathFollow3D" instance=ExtResource("6_mhn8n")]
