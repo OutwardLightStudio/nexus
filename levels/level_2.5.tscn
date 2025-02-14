@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_s0rnp"]
 [ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_sy1ea"]
-[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://player/player.tscn" id="2_ss70d"]
+[ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_ss70d"]
 [ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://environments/cave_1.tscn" id="3_eg0q5"]
 
 
