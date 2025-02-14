@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm4cwn1uiokpq"]
+
+[ext_resource type="Script" path="res://bat_movement.gd" id="1_bat"]
+[ext_resource type="PackedScene" uid="uid://buvwk2y4l40gj" path="res://better bat.tscn" id="2_bat"]
+
+[sub_resource type="Curve3D" id="Curve3D_test"]
+_data = {
+"points": PackedVector3Array(0, 2, 0, 0, -2, 0, -8, 0, 0, -2, 0, 0, 2, 0, 0, 0, 4, 0, -2, 0, 0, 2, 0, 0, 8, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="TestScene" type="Node3D"]
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_test")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(7.54979e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, -7.54979e-08, -3.30012e-15, -8, 0, 0)
+script = ExtResource("1_bat")
+speed = 2.0
+jitter_intensity = 200.0
+
+[node name="Bat" parent="Path3D/PathFollow3D" instance=ExtResource("2_bat")]
+
+[node name="PathDebug" type="MeshInstance3D" parent="Path3D"]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+polygon = PackedVector2Array(-0.1, -0.1, 0.1, -0.1, 0.1, 0.1, -0.1, 0.1)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.5
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 5, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=32 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -109,10 +109,9 @@ script = ExtResource("2_m6058")
 script = ExtResource("4_qtt7p")
 
 [node name="FuelSlider" parent="Fuel" instance=ExtResource("8_o0vq7")]
-offset_left = 62.0
-offset_top = 99.0
-offset_right = 127.0
-offset_bottom = 404.0
+offset_top = 446.0
+offset_right = 142.0
+offset_bottom = 751.0
 size_flags_horizontal = 0
 script = null
 
