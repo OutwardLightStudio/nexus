@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=32 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]

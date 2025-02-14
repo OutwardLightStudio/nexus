@@ -73,7 +73,6 @@ func apply_thrust_force(_delta: float) -> void:
 	parent.thrust_active = true
 	
 func update_boost_cooldown(delta: float) -> void:
-	print("Boost cooldown timer:", boost_cooldown_timer, "Boost enabled:", boost_enabled)
 	if not boost_enabled:
 		boost_cooldown_timer -= delta
 		if boost_cooldown_timer <= 0:

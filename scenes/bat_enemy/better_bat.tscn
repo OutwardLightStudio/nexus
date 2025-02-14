@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://buvwk2y4l40gj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imkf1"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bat"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgm6d"]
+material = SubResource("StandardMaterial3D_bat")
+size = Vector3(2, 2, 2)
+
+[node name="Bat" type="Area3D" groups=["Hazard"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_imkf1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_mgm6d")

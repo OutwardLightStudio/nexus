@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_hyudu"]
 [ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://environments/cave_1.tscn" id="3_hjc7r"]
 
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrd0v"]
 albedo_color = Color(0.348827, 0.433489, 0.944039, 1)
 

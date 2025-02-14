@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwt6ner4kappn"]
+[gd_scene load_steps=9 format=3 uid="uid://dwt6ner4kappn"]
 
 [ext_resource type="PackedScene" uid="uid://cabj5tagd7116" path="res://environments/cave_1.tscn" id="1_jnsrf"]
 [ext_resource type="Script" path="res://levels/landing_pad.gd" id="2_cweo1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="3_lfap1"]
 [ext_resource type="PackedScene" uid="uid://bwwd8ds1by6v4" path="res://scenes/trigger_pad.tscn" id="4_av7qf"]
 [ext_resource type="PackedScene" uid="uid://7e87dwxuo4u2" path="res://scenes/sliding_door.tscn" id="5_nut2n"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
 albedo_color = Color(0.28975, 0.408702, 1, 1)
@@ -38,3 +39,6 @@ open_distance = 6.0
 [node name="TriggerPad" parent="." instance=ExtResource("4_av7qf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26458, 0.245717, 0.555734)
 controlled_door_path = NodePath("../SlidingDoor")
+
+[node name="Path" parent="." instance=ExtResource("7_e7hyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.57239, 0)
