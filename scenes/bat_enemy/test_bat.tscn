@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dm4cwn1uiokpq"]
 
-[ext_resource type="Script" path="res://scenes/bat_enemy/bat_movement.gd" id="1_bat"]
+[ext_resource type="Script" uid="uid://bkofjcs50qd65" path="res://scenes/bat_enemy/bat_movement.gd" id="1_bat"]
 [ext_resource type="PackedScene" uid="uid://buvwk2y4l40gj" path="res://scenes/bat_enemy/better_bat.tscn" id="2_bat"]
 
 [sub_resource type="Curve3D" id="Curve3D_test"]

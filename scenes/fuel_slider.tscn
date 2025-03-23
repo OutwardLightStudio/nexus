@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bds3pc6arkgvv"]
 
 [ext_resource type="Texture2D" uid="uid://b5wcn006sn2kw" path="res://assets/sprites/Fuel gauge - rocket game.png" id="1_ts72v"]
-[ext_resource type="Script" path="res://scenes/fuel_bar.gd" id="2_q6t1k"]
+[ext_resource type="Script" uid="uid://bkeer27rwaj0d" path="res://scenes/fuel_bar.gd" id="2_q6t1k"]
 
 [sub_resource type="Gradient" id="Gradient_64sbd"]
 offsets = PackedFloat32Array(0, 0.535211, 1)
