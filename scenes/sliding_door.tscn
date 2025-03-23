@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://7e87dwxuo4u2"]
 
-[ext_resource type="Script" path="res://scenes/sliding_door.gd" id="1_0nt16"]
+[ext_resource type="Script" uid="uid://dqey024towu35" path="res://scenes/sliding_door.gd" id="1_0nt16"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyy2r"]
 albedo_color = Color(0.971909, 0, 0.22458, 1)

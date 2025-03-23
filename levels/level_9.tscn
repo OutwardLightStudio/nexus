@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8yqt44eemis7"]
 
-[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_i22n3"]
+[ext_resource type="Script" uid="uid://ju04761ldv71" path="res://levels/landing_pad.gd" id="1_i22n3"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_clmxp"]
-[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://scenes/environment_test.tscn" id="3_u6xrj"]
+[ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://environments/cave_2.tscn" id="3_u6xrj"]
 [ext_resource type="PackedScene" uid="uid://bexur4xjjutc" path="res://scenes/moving_hazard.tscn" id="4_wfssg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_340e8"]
