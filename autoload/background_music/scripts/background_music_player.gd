@@ -20,10 +20,25 @@ var _is_transitioning: bool = false
 var _is_playing: bool = false
 var _paused_position: float = 0.0
 
-@onready var main_player: AudioStreamPlayer = $MainPlayer
-@onready var crossfade_player: AudioStreamPlayer = $CrossfadePlayer
+var main_player: AudioStreamPlayer
+var crossfade_player: AudioStreamPlayer
 
 func _ready() -> void:
+	# Try to get existing nodes first (scene-based initialization)
+	main_player = get_node_or_null("MainPlayer")
+	crossfade_player = get_node_or_null("CrossfadePlayer")
+	
+	# If nodes don't exist, create them (programmatic initialization)
+	if not main_player:
+		main_player = AudioStreamPlayer.new()
+		main_player.name = "MainPlayer"
+		add_child(main_player)
+	
+	if not crossfade_player:
+		crossfade_player = AudioStreamPlayer.new()
+		crossfade_player.name = "CrossfadePlayer"
+		add_child(crossfade_player)
+	
 	if autoplay and _validate_playlist():
 		play_track(0)
 

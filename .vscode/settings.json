@@ -1,0 +1,8 @@
+{
+    "search.exclude": {
+        "**/addons/gut/**": true
+    },
+    "files.exclude": {
+        "**/addons/gut/**": false
+    }
+}
