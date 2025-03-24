@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://buxj68c16odaq" path="res://assets/models/rocket/scene.gltf" id="17_3kkwo"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sg736"]
-height = 1.2
+height = 1.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bc2uk"]
 height = 0.71
@@ -128,7 +128,7 @@ script = ExtResource("6_jxs5u")
 script = ExtResource("7_p66tl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.603185, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.776183, 0)
 shape = SubResource("CylinderShape3D_sg736")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
