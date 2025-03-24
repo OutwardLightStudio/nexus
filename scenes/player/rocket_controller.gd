@@ -93,6 +93,26 @@ func connect_signals():
 	landing.successful_landing.connect(_on_successful_landing)
 	landing_state_changed.connect(_on_landing_state_changed)
 	
+	if movement:
+		movement.boost_requested.connect(_on_boost_requested)
+	
+	if fuel_controller:
+		fuel_controller.fuel_depleted.connect(_on_fuel_depleted)
+		fuel_controller.boost_fuel_consumed.connect(_on_boost_fuel_consumed)
+
+# Signal handlers that forward events between controllers
+func _on_boost_requested():
+	if fuel_controller:
+		fuel_controller.try_consume_boost_fuel()
+
+func _on_fuel_depleted():
+	if movement:
+		movement.on_fuel_depleted()
+
+func _on_boost_fuel_consumed():
+	if movement:
+		movement.on_boost_fuel_consumed()
+
 func _on_body_entered(body: Node3D):
 	# Don't process collisions if we're already crashed or transitioning
 	if current_state in [State.CRASHED, State.TRANSITIONING]:
@@ -112,9 +132,6 @@ func _on_body_entered(body: Node3D):
 	if tilt_angle > critical_tipping_angle:
 		start_crash_sequence()
 		return
-
-func _on_boost_requested():
-	fuel_controller.try_consume_boost_fuel()
 
 func _on_crashed():
 	current_state = State.CRASHED

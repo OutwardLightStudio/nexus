@@ -59,9 +59,6 @@ func handle_fuel_depletion(delta: float):
 		time_since_fuel_out += delta
 		if time_since_fuel_out >= FUEL_OUT_CRASH_DELAY:
 			parent.start_crash_sequence()
-	else:
-		is_fuel_depleted = false
-		time_since_fuel_out = 0.0
 
 func reduce_fuel(amount: float):
 	current_fuel -= amount
