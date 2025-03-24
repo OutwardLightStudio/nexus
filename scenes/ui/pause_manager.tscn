@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="1_scnkm"]
+
+[node name="PauseManager" type="CanvasLayer"]
+layer = 10
+process_mode = 3
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_scnkm")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=33 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" uid="uid://co3vev6mkb25q" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -19,6 +19,7 @@
 [ext_resource type="Material" uid="uid://xrb2i7caokn4" path="res://particles/success_particles.tres" id="12_msahl"]
 [ext_resource type="Material" uid="uid://b8nvx6ca73y1r" path="res://materials/success_material.tres" id="13_x3ewv"]
 [ext_resource type="PackedScene" uid="uid://buxj68c16odaq" path="res://assets/models/rocket/scene.gltf" id="17_3kkwo"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="18_w1p2d"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sg736"]
 height = 1.5
@@ -242,5 +243,11 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.73207)
 
 [node name="E_button" parent="." instance=ExtResource("7_0w6d2")]
+
+[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+
+[node name="PauseMenu" parent="PauseMenuLayer" instance=ExtResource("18_w1p2d")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

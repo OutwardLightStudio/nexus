@@ -5,7 +5,7 @@ signal crashed
 signal crash_ended
 signal landing_state_changed(is_on_pad: bool)
 
-enum State { FLYING, LANDING, CRASHED, TRANSITIONING }
+enum State { FLYING, LANDING, CRASHED, TRANSITIONING, PAUSED }
 
 const UP_VECTOR := Vector3.UP
 
@@ -64,6 +64,7 @@ var tilt_angle: float = 0.0
 @onready var landing = $Landing
 @onready var effects = $Effects
 @onready var e_button = $E_button
+@onready var pause_menu = $PauseMenuLayer/PauseMenu
 
 func _ready():
 	await get_tree().process_frame  # Ensure children are ready
@@ -75,11 +76,14 @@ func _ready():
 	
 
 func _process(delta: float):
+	if current_state == State.PAUSED:
+		return
+		
 	fuel_controller.process(delta)  # Fuel usage checks here
 
 func _physics_process(delta: float):
 
-	if current_state in [State.TRANSITIONING, State.CRASHED]:
+	if current_state in [State.TRANSITIONING, State.CRASHED, State.PAUSED]:
 		return
 		
 	movement.process(delta)
