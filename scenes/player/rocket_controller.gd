@@ -5,7 +5,7 @@ signal crashed
 signal crash_ended
 signal landing_state_changed(is_on_pad: bool)
 
-enum State { FLYING, LANDING, CRASHED, TRANSITIONING, PAUSED }
+enum State { FLYING, LANDING, CRASHED, TRANSITIONING }
 
 const UP_VECTOR := Vector3.UP
 
@@ -76,14 +76,10 @@ func _ready():
 	
 
 func _process(delta: float):
-	if current_state == State.PAUSED:
-		return
-		
 	fuel_controller.process(delta)  # Fuel usage checks here
 
 func _physics_process(delta: float):
-
-	if current_state in [State.TRANSITIONING, State.CRASHED, State.PAUSED]:
+	if current_state in [State.TRANSITIONING, State.CRASHED]:
 		return
 		
 	movement.process(delta)
