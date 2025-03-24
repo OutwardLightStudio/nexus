@@ -31,8 +31,14 @@ func _on_resume_pressed():
 
 func _on_restart_pressed():
 	get_tree().paused = false  # Unpause before restarting
-	get_tree().reload_current_scene()
+	call_deferred("_reload_scene")
 
 func _on_main_menu_pressed():
 	get_tree().paused = false  # Unpause before changing scenes
+	call_deferred("_change_to_main_menu")
+
+func _reload_scene():
+	get_tree().reload_current_scene()
+
+func _change_to_main_menu():
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
