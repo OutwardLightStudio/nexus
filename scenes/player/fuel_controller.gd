@@ -1,12 +1,10 @@
 extends Node3D
 class_name FuelController
 
-
 signal fuel_depleted
 signal boost_fuel_consumed  # Signal for when boost fuel is consumed
 
-
-@onready var fuel_slider: TextureProgressBar = $FuelSlider
+@onready var fuel_slider: TextureProgressBar = $"../HUD/MarginContainer/FuelControls/FuelSlider"
 @onready var parent: RocketController = get_parent() as RocketController
 
 const FUEL_OUT_CRASH_DELAY = 5.0
@@ -73,11 +71,11 @@ func update_fuel_display(current_fuel: float):
 			# Yellow to Red (0% to 50%)
 			fuel_slider.modulate = yellow_color.lerp(red_color, (0.5 - fuel_percentage) * 2.0)
 
-
 func try_consume_boost_fuel() -> bool:
 	if parent.current_fuel >= parent.boost_fuel_cost:
 		parent.current_fuel -= parent.boost_fuel_cost
 		parent.current_fuel = clamp(parent.current_fuel, 0.0, parent.max_fuel)
 		boost_fuel_consumed.emit()
 		return true
+	
 	return false

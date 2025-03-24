@@ -3,9 +3,10 @@ class_name MovementController
 
 signal boost_activated
 signal boost_deactivated
+signal boost_available
+signal boost_unavailable
 
 @onready var parent: RocketController = get_parent() as RocketController
-@onready var e_button = get_parent().get_node("E_button")
 @export var boost_cooldown_duration: float = 1.0
 
 # Boost-related state
@@ -18,7 +19,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	connect_signals()
 	set_process(true)
-	e_button.visible = true
+	boost_enabled = true
+	boost_available.emit()
 
 func connect_signals() -> void:
 	if parent and parent.fuel_controller:
@@ -79,8 +81,7 @@ func update_boost_cooldown(delta: float) -> void:
 		if boost_cooldown_timer <= 0:
 			boost_cooldown_timer = 0.0
 			boost_enabled = true
-			e_button.visible = true
-
+			boost_available.emit()
 
 # Boost-related methods
 func can_activate_boost() -> bool:
@@ -95,7 +96,7 @@ func activate_boost() -> void:
 	is_boost_active = true
 	parent.boosting = true
 	boost_enabled = false
-	e_button.visible = false
+	boost_unavailable.emit()
 	boost_timer = parent.boost_duration
 	boost_cooldown_timer = boost_cooldown_duration
 	
