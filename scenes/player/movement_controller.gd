@@ -2,6 +2,7 @@ extends Node
 class_name MovementController
 
 signal boost_activated
+signal boost_deactivated
 
 @onready var parent: RocketController = get_parent() as RocketController
 @onready var e_button = get_parent().get_node("E_button")
@@ -121,6 +122,7 @@ func deactivate_boost() -> void:
 	parent.boosting = false
 	boost_timer = 0.0
 	parent.thrust_active = false
+	boost_deactivated.emit()
 
 func consume_boost_fuel() -> void:
 	parent.current_fuel -= parent.boost_fuel_cost

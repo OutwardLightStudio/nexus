@@ -24,7 +24,9 @@ func connect_signals():
 		parent.crashed.connect(_on_crashed)
 		parent.crash_ended.connect(_on_crash_ended)
 		parent.landing_state_changed.connect(_on_landing_state_changed)
-		parent.movement.boost_activated.connect(_on_boost_activated)
+		if parent.movement:
+			parent.movement.boost_activated.connect(_on_boost_activated)
+			parent.movement.connect("boost_deactivated", _on_boost_deactivated)
 
 # Crash effects
 func _on_crashed():
@@ -45,6 +47,9 @@ func _on_landing_state_changed(on_pad: bool):
 # Movement effects
 func _on_boost_activated():
 	play_boost_effects()
+
+func _on_boost_deactivated():
+	stop_boost_effects()
 
 func update_thrust_effects(is_thrusting: bool):
 	main_booster_particles.emitting = is_thrusting
@@ -74,3 +79,7 @@ func stop_success_effects():
 func play_boost_effects():
 	main_booster_particles.emitting = true
 	bubbles_sound.play()
+
+func stop_boost_effects():
+	main_booster_particles.emitting = false
+	bubbles_sound.stop()
