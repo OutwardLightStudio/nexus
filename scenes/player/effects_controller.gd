@@ -45,6 +45,9 @@ func _on_landing_state_changed(on_pad: bool):
 		stop_success_effects()
 
 # Movement effects
+func _on_fuel_depleted():
+	update_thrust_effects(false)
+
 func _on_boost_activated():
 	play_boost_effects()
 
