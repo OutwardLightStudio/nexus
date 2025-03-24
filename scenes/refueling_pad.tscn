@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwivci11c4qe8"]
 
-[ext_resource type="Script" uid="uid://df7nhc0md14xw" path="res://refueling_pad.gd" id="1_6wxl3"]
+[ext_resource type="Script" uid="uid://df7nhc0md14xw" path="res://scenes/refueling_pad.gd" id="1_6wxl3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ska"]
 albedo_color = Color(0, 0.435682, 0.0116695, 1)
