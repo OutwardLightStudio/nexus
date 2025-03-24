@@ -41,7 +41,6 @@ var is_thrusting: bool = false:
 		if is_thrusting != value:
 			is_thrusting = value
 
-var current_fuel: float = max_fuel
 var boosting: bool = false
 var boost_timer: float = 0.0
 var boost_cooldown_timer: float = 0.0
@@ -63,17 +62,18 @@ var tilt_angle: float = 0.0
 @onready var stability = $Stability
 @onready var landing = $Landing
 @onready var effects = $Effects
-@onready var e_button = $E_button
 @onready var pause_menu = $PauseMenuLayer/PauseMenu
+
+# Property to access current fuel through the fuel controller
+var current_fuel: float:
+	get:
+		return fuel_controller.current_fuel if fuel_controller else 0.0
 
 func _ready():
 	await get_tree().process_frame  # Ensure children are ready
 	connect_signals()
-	fuel_controller.setup_fuel(max_fuel, current_fuel)
 	effects.get_node("BubblesAudio").playing = false
 	stability.tilt_changed.connect(_on_tilt_changed)
-	
-	
 
 func _process(delta: float):
 	fuel_controller.process(delta)  # Fuel usage checks here
@@ -86,8 +86,6 @@ func _physics_process(delta: float):
 	stability.process(delta)
 	landing.process(delta)
 
-	
-
 func connect_signals():
 	# Custom rocket signals
 	crashed.connect(_on_crashed)
@@ -95,6 +93,26 @@ func connect_signals():
 	landing.successful_landing.connect(_on_successful_landing)
 	landing_state_changed.connect(_on_landing_state_changed)
 	
+	if movement:
+		movement.boost_requested.connect(_on_boost_requested)
+	
+	if fuel_controller:
+		fuel_controller.fuel_depleted.connect(_on_fuel_depleted)
+		fuel_controller.boost_fuel_consumed.connect(_on_boost_fuel_consumed)
+
+# Signal handlers that forward events between controllers
+func _on_boost_requested():
+	if fuel_controller:
+		fuel_controller.try_consume_boost_fuel()
+
+func _on_fuel_depleted():
+	if movement:
+		movement.on_fuel_depleted()
+
+func _on_boost_fuel_consumed():
+	if movement:
+		movement.on_boost_fuel_consumed()
+
 func _on_body_entered(body: Node3D):
 	# Don't process collisions if we're already crashed or transitioning
 	if current_state in [State.CRASHED, State.TRANSITIONING]:
@@ -114,10 +132,6 @@ func _on_body_entered(body: Node3D):
 	if tilt_angle > critical_tipping_angle:
 		start_crash_sequence()
 		return
-
-func _on_boost_requested():
-	if current_fuel >= boost_fuel_cost:
-		movement.activate_boost()
 
 func _on_crashed():
 	current_state = State.CRASHED
@@ -142,15 +156,11 @@ func start_crash_sequence():
 	tween.tween_interval(2.5)
 	tween.tween_callback(func(): crash_ended.emit())
 
-func activate_boost():		
-	current_fuel -= boost_fuel_cost
-	current_fuel = clamp(current_fuel, 0.0, max_fuel)
+func activate_boost():
 	boosting = true
 	boost_timer = boost_duration
 	boost_cooldown_timer = boost_cooldown_duration
 	boost_enabled = false
-	e_button.visible = false
-
 
 func _on_successful_landing():
 	var landing_pad = landing.get_landing_pad()

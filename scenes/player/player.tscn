@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://brs3why3rugsi"]
+[gd_scene load_steps=32 format=3 uid="uid://brs3why3rugsi"]
 
 [ext_resource type="Script" uid="uid://co3vev6mkb25q" path="res://scenes/player/rocket_controller.gd" id="1_scd23"]
 [ext_resource type="AudioStream" uid="uid://c08t1jheoq12k" path="res://assets/sound/bubbles.mp3" id="2_05a8e"]
@@ -10,16 +10,17 @@
 [ext_resource type="AudioStream" uid="uid://evbgf785fj5w" path="res://assets/sound/success.mp3" id="4_vxola"]
 [ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="5_sbef4"]
 [ext_resource type="Script" uid="uid://d20lgmwr5ukoh" path="res://scenes/player/stability_controller.gd" id="6_jxs5u"]
-[ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://e_button.tscn" id="7_0w6d2"]
+[ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://scenes/e_button.tscn" id="7_0w6d2"]
 [ext_resource type="Script" uid="uid://e56syxi527h2" path="res://scenes/player/landing_controller.gd" id="7_p66tl"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="8_o0vq7"]
+[ext_resource type="PackedScene" uid="uid://d1mro4eexgvs6" path="res://scenes/ui/hud.tscn" id="8_gq37x"]
 [ext_resource type="Material" uid="uid://6fwd7r8tmf8v" path="res://particles/explosion_particles.tres" id="10_xw84m"]
 [ext_resource type="Script" uid="uid://bgjutt58yio44" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
 [ext_resource type="Material" uid="uid://xrb2i7caokn4" path="res://particles/success_particles.tres" id="12_msahl"]
 [ext_resource type="Material" uid="uid://b8nvx6ca73y1r" path="res://materials/success_material.tres" id="13_x3ewv"]
 [ext_resource type="PackedScene" uid="uid://buxj68c16odaq" path="res://assets/models/rocket/scene.gltf" id="17_3kkwo"]
-[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="18_w1p2d"]
+[ext_resource type="PackedScene" uid="uid://c1keu360hjpld" path="res://scenes/ui/pause_menu.tscn" id="18_w1p2d"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sg736"]
 height = 1.5
@@ -108,19 +109,6 @@ script = ExtResource("2_m6058")
 
 [node name="Fuel" type="Node3D" parent="."]
 script = ExtResource("4_qtt7p")
-
-[node name="FuelSlider" parent="Fuel" instance=ExtResource("8_o0vq7")]
-offset_left = 62.0
-offset_top = 99.0
-offset_right = 127.0
-offset_bottom = 404.0
-size_flags_horizontal = 0
-script = null
-
-[node name="Sprite2D" type="Sprite2D" parent="Fuel"]
-position = Vector2(107, 685)
-scale = Vector2(5, 5)
-texture = ExtResource("5_sbef4")
 
 [node name="Stability" type="Node3D" parent="."]
 script = ExtResource("6_jxs5u")
@@ -242,7 +230,7 @@ skeleton = NodePath("../..")
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.73207)
 
-[node name="E_button" parent="." instance=ExtResource("7_0w6d2")]
+[node name="HUD" parent="." instance=ExtResource("8_gq37x")]
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -251,3 +239,6 @@ layer = 10
 [node name="PauseMenu" parent="PauseMenuLayer" instance=ExtResource("18_w1p2d")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="boost_available" from="Movement" to="HUD" method="show_boost_available"]
+[connection signal="boost_unavailable" from="Movement" to="HUD" method="hide_boost_available"]
+[connection signal="fuel_changed" from="Fuel" to="HUD" method="update_fuel_display"]

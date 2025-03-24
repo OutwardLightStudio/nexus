@@ -3,9 +3,11 @@ class_name MovementController
 
 signal boost_activated
 signal boost_deactivated
+signal boost_available
+signal boost_unavailable
+signal boost_requested  # New signal for requesting boost
 
 @onready var parent: RocketController = get_parent() as RocketController
-@onready var e_button = get_parent().get_node("E_button")
 @export var boost_cooldown_duration: float = 1.0
 
 # Boost-related state
@@ -16,14 +18,9 @@ var boost_enabled: bool = false
 
 func _ready() -> void:
 	await get_tree().process_frame
-	connect_signals()
 	set_process(true)
-	e_button.visible = true
-
-func connect_signals() -> void:
-	if parent and parent.fuel_controller:
-		parent.fuel_controller.fuel_depleted.connect(_on_fuel_depleted)
-		parent.fuel_controller.boost_fuel_consumed.connect(_on_boost_fuel_consumed)
+	boost_enabled = true
+	boost_available.emit()
 
 func process(delta: float) -> void:
 	if parent.current_state in [parent.State.CRASHED, parent.State.TRANSITIONING]:
@@ -48,7 +45,8 @@ func process_thrust(delta: float) -> void:
 func process_boost(delta: float) -> void:
 	# Handle boost activation
 	if Input.is_action_just_pressed("boost") and can_activate_boost():
-		activate_boost()
+		# Emit signal instead of directly calling fuel controller
+		boost_requested.emit()
 	
 	# Process active boost
 	if is_boost_active:
@@ -79,8 +77,7 @@ func update_boost_cooldown(delta: float) -> void:
 		if boost_cooldown_timer <= 0:
 			boost_cooldown_timer = 0.0
 			boost_enabled = true
-			e_button.visible = true
-
+			boost_available.emit()
 
 # Boost-related methods
 func can_activate_boost() -> bool:
@@ -95,11 +92,9 @@ func activate_boost() -> void:
 	is_boost_active = true
 	parent.boosting = true
 	boost_enabled = false
-	e_button.visible = false
+	boost_unavailable.emit()
 	boost_timer = parent.boost_duration
 	boost_cooldown_timer = boost_cooldown_duration
-	
-	consume_boost_fuel()
 	boost_activated.emit()
 
 func apply_boost_force(_delta: float) -> void:
@@ -124,10 +119,6 @@ func deactivate_boost() -> void:
 	parent.thrust_active = false
 	boost_deactivated.emit()
 
-func consume_boost_fuel() -> void:
-	parent.current_fuel -= parent.boost_fuel_cost
-	parent.current_fuel = clamp(parent.current_fuel, 0.0, parent.max_fuel)
-
 # Rotation-related methods
 func apply_rotation(rotation_direction: float, delta: float) -> void:
 	var torque_amount = parent.torque * delta * rotation_direction
@@ -147,14 +138,14 @@ func calculate_dampened_force(base_force: float, max_speed: float, current_speed
 func apply_force(force: float) -> void:
 	parent.apply_central_force(parent.global_transform.basis.y * force)
 
-# Signal handlers
-func _on_fuel_depleted() -> void:
+# Public methods that can be called by the rocket controller when fuel is depleted or a boost is granted
+func on_fuel_depleted() -> void:
 	parent.is_thrusting = false
 	parent.thrust_active = false
 	
 	if is_boost_active:
 		deactivate_boost()
 
-func _on_boost_fuel_consumed() -> void:
-	activate_boost()
-	boost_activated.emit()
+func on_boost_fuel_consumed() -> void:
+	if not is_boost_active:
+		activate_boost()

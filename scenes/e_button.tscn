@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2rt1lvgtdcsq"]
 
-[ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="1_mag8y"]
+[ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="1_3cnlo"]
 
 [node name="E_button" type="Sprite2D"]
 position = Vector2(1779, 951)
 scale = Vector2(7, 7)
-texture = ExtResource("1_mag8y")
+texture = ExtResource("1_3cnlo")
