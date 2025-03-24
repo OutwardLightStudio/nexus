@@ -126,8 +126,8 @@ func deactivate_boost() -> void:
 	boost_deactivated.emit()
 
 func consume_boost_fuel() -> void:
-	parent.current_fuel -= parent.boost_fuel_cost
-	parent.current_fuel = clamp(parent.current_fuel, 0.0, parent.max_fuel)
+	if parent and parent.fuel_controller:
+		parent.fuel_controller.try_consume_boost_fuel()
 
 # Rotation-related methods
 func apply_rotation(rotation_direction: float, delta: float) -> void:

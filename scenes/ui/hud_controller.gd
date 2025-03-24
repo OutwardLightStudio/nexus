@@ -14,10 +14,12 @@ func _ready() -> void:
 		show_boost_available()
 
 func show_boost_available() -> void:
-	e_button.visible = true
+	if e_button:
+		e_button.visible = true
 
 func hide_boost_available() -> void:
-	e_button.visible = false
+	if e_button:
+		e_button.visible = false
 
 func update_fuel_display(current_fuel: float, max_fuel: float) -> void:
 	if fuel_slider:

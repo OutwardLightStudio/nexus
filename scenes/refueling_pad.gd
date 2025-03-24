@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+signal refuel_tick(amount: float)
+
 @onready var area3d: Area3D = $Area3D  # Reference to the Area3D child node
 @export var refuel_rate: float = 10.0  # Fuel added per second to the rocket
 
@@ -25,10 +27,5 @@ func _on_body_exited(body: Node3D):
 func _process(delta: float):
 	# If a rocket is on the pad and its fuel is not full, refuel it
 	if rocket and rocket.current_fuel < rocket.max_fuel:
-		# Increment the rocket's fuel
-		rocket.current_fuel += refuel_rate * delta
-		rocket.current_fuel = clamp(rocket.current_fuel, 0, rocket.max_fuel)
-		
-		 # Emit the fuel change signal instead of directly updating UI
-		if rocket.fuel_controller:
-			rocket.fuel_controller.fuel_changed.emit(rocket.current_fuel, rocket.max_fuel)
+		var refuel_amount = refuel_rate * delta
+		refuel_tick.emit(refuel_amount)
