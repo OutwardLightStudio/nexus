@@ -151,6 +151,7 @@ func apply_force(force: float) -> void:
 func _on_fuel_depleted() -> void:
 	parent.is_thrusting = false
 	parent.thrust_active = false
+	parent.effects.update_thrust_effects(false)
 	
 	if is_boost_active:
 		deactivate_boost()
