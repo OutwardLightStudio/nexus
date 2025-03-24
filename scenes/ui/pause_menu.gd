@@ -12,6 +12,9 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
+		if get_tree().paused and not visible:
+			return  # Don't respond if game is paused for other reasons
+		
 		if not visible:
 			pause_game()
 		else:
