@@ -26,7 +26,9 @@ func connect_signals():
 		parent.landing_state_changed.connect(_on_landing_state_changed)
 		if parent.movement:
 			parent.movement.boost_activated.connect(_on_boost_activated)
-			parent.movement.connect("boost_deactivated", _on_boost_deactivated)
+			parent.movement.boost_deactivated.connect(_on_boost_deactivated)
+		if parent.fuel_controller:
+			parent.fuel_controller.fuel_depleted.connect(_on_fuel_depleted)
 
 # Crash effects
 func _on_crashed():
