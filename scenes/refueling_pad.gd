@@ -29,6 +29,6 @@ func _process(delta: float):
 		rocket.current_fuel += refuel_rate * delta
 		rocket.current_fuel = clamp(rocket.current_fuel, 0, rocket.max_fuel)
 		
-		# Update the fuel gauge (assuming fuel_controller handles the slider)
+		 # Emit the fuel change signal instead of directly updating UI
 		if rocket.fuel_controller:
-			rocket.fuel_controller.update_fuel_display(rocket.current_fuel)
+			rocket.fuel_controller.fuel_changed.emit(rocket.current_fuel, rocket.max_fuel)

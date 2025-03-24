@@ -241,3 +241,4 @@ layer = 10
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="boost_available" from="Movement" to="HUD" method="show_boost_available"]
 [connection signal="boost_unavailable" from="Movement" to="HUD" method="hide_boost_available"]
+[connection signal="fuel_changed" from="Fuel" to="HUD" method="update_fuel_display"]
