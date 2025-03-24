@@ -64,6 +64,7 @@ var tilt_angle: float = 0.0
 @onready var landing = $Landing
 @onready var effects = $Effects
 @onready var e_button = $E_button
+@onready var pause_menu = $PauseMenuLayer/PauseMenu
 
 func _ready():
 	await get_tree().process_frame  # Ensure children are ready
@@ -78,7 +79,6 @@ func _process(delta: float):
 	fuel_controller.process(delta)  # Fuel usage checks here
 
 func _physics_process(delta: float):
-
 	if current_state in [State.TRANSITIONING, State.CRASHED]:
 		return
 		
