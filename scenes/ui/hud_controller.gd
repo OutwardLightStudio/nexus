@@ -12,6 +12,14 @@ var red_color: Color = Color(1, 0, 0)  # Red
 func _ready() -> void:
 	if e_button:
 		show_boost_available()
+		e_button.pressed.connect(_on_boost_button_pressed)
+
+func _on_boost_button_pressed() -> void:
+	# Simulate a keyboard "boost" press by sending an InputEventAction
+	var event = InputEventAction.new()
+	event.action = "boost"
+	event.pressed = true
+	Input.parse_input_event(event)
 
 func show_boost_available() -> void:
 	if e_button:

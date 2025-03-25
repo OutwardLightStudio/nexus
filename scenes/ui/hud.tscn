@@ -54,7 +54,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="E_button" parent="MarginContainer/BoostControl" instance=ExtResource("2_kgtxk")]
-position = Vector2(-50, -50)
+position = Vector2(-150, -150)
 scale = Vector2(4, 4)
 
 [node name="Virtual Joystick" parent="." instance=ExtResource("5_136eg")]
