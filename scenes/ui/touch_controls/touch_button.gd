@@ -22,8 +22,8 @@ func _ready():
 		key_label.text = label_text
 	
 	# Connect signals
-	pressed.connect(_on_button_pressed)
-	released.connect(_on_button_released)
+	button_down.connect(_on_button_pressed)
+	button_up.connect(_on_button_released)
 
 func _on_button_pressed():
 	# Change the color of the icon when pressed
@@ -35,12 +35,8 @@ func _on_button_released():
 	if arrow_icon:
 		arrow_icon.modulate = icon_normal_color
 
-func add_theme_color_override(property: String, color: Color):
-	if property == "icon_normal_color":
-		icon_normal_color = color
-		if not button_pressed:
-			arrow_icon.modulate = color
-	elif property == "icon_pressed_color":
-		icon_pressed_color = color
-		if button_pressed:
-			arrow_icon.modulate = color
+func set_icon_colors(normal_color: Color, pressed_color: Color):
+	icon_normal_color = normal_color
+	icon_pressed_color = pressed_color
+	if arrow_icon:
+		arrow_icon.modulate = icon_pressed_color if is_pressed() else icon_normal_color
