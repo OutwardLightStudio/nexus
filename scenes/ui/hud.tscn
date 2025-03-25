@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1v1ppm8x01cy"]
+[gd_scene load_steps=6 format=3 uid="uid://c1v1ppm8x01cy"]
 
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="1_mgo7f"]
 [ext_resource type="Script" uid="uid://dbr1lj3lpo6hp" path="res://scenes/ui/hud_controller.gd" id="1_n2p4f"]
 [ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://scenes/e_button.tscn" id="2_kgtxk"]
 [ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="3_8klnk"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="5_136eg"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -55,3 +56,9 @@ size_flags_vertical = 8
 [node name="E_button" parent="MarginContainer/BoostControl" instance=ExtResource("2_kgtxk")]
 position = Vector2(-50, -50)
 scale = Vector2(4, 4)
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("5_136eg")]
+layout_mode = 1
+action_left = "rotate_left"
+action_right = "rotate_right"
+action_up = "thrust"
