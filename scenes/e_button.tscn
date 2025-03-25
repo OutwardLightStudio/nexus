@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2rt1lvgtdcsq"]
+[gd_scene load_steps=3 format=3 uid="uid://b2rt1lvgtdcsq"]
 
 [ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="1_3cnlo"]
+[ext_resource type="Script" path="res://scenes/e_button.gd" id="2_qrgfe"]
 
-[node name="E_button" type="Sprite2D"]
-position = Vector2(1779, 951)
-scale = Vector2(7, 7)
+[node name="E_button" type="Button"]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+flat = true
+script = ExtResource("2_qrgfe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
 texture = ExtResource("1_3cnlo")

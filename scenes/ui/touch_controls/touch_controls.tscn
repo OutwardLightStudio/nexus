@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdexohi4hhbl8"]
+[gd_scene load_steps=9 format=3 uid="uid://cdexohi4hhbl8"]
 
-[ext_resource type="Script" uid="uid://ccxfpxqfkwbiu" path="res://scenes/ui/touch_controls/touch_controls.gd" id="1_gcar5"]
-[ext_resource type="Script" uid="uid://e3r4l58gljcf" path="res://scenes/ui/touch_controls/touch_button.gd" id="2_j5bdo"]
-[ext_resource type="Script" uid="uid://c0rjrfpy40stw" path="res://scenes/ui/touch_controls/arrow_up.gd" id="3_t15rr"]
-[ext_resource type="Script" uid="uid://cv862d2dfrgn3" path="res://scenes/ui/touch_controls/arrow_left.gd" id="4_qfscv"]
-[ext_resource type="Script" uid="uid://di1xtkxvl6jnt" path="res://scenes/ui/touch_controls/arrow_right.gd" id="5_mueb3"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/touch_controls.gd" id="1_gcar5"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/touch_button.gd" id="2_j5bdo"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/arrow_up.gd" id="3_t15rr"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/arrow_left.gd" id="4_qfscv"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/arrow_right.gd" id="5_mueb3"]
+[ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://scenes/e_button.tscn" id="6_1vydk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbyvx"]
 bg_color = Color(0.266667, 0.266667, 0.266667, 0.501961)
@@ -44,9 +45,9 @@ theme_override_constants/separation = 10
 [node name="ThrustButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 script = ExtResource("2_j5bdo")
 label_text = "W"
 
@@ -88,9 +89,9 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 script = ExtResource("2_j5bdo")
 label_text = "A"
 
@@ -127,9 +128,9 @@ vertical_alignment = 2
 custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 script = ExtResource("2_j5bdo")
 label_text = "D"
 
@@ -161,3 +162,21 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 14
 text = "D"
 vertical_alignment = 2
+
+[node name="BoostControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="E_button" parent="BoostControl" instance=ExtResource("6_1vydk")]
+position = Vector2(50, 50)
+scale = Vector2(4, 4)

@@ -7,15 +7,19 @@ signal rotate_left_pressed
 signal rotate_left_released
 signal rotate_right_pressed
 signal rotate_right_released
+signal boost_pressed
+signal boost_released
 
 @onready var thrust_button = $VBoxContainer/ThrustButton
 @onready var rotate_left_button = $VBoxContainer/RotationContainer/RotateLeftButton
 @onready var rotate_right_button = $VBoxContainer/RotationContainer/RotateRightButton
+@onready var boost_button = $BoostControl/E_button
 
 # Keep track of button states
 var thrust_active = false
 var rotate_left_active = false
 var rotate_right_active = false
+var boost_active = false
 
 # Colors
 var button_normal_color = Color("#6b6b6b")
@@ -32,6 +36,11 @@ func _ready():
 	rotate_right_button.button_down.connect(_on_rotate_right_button_pressed)
 	rotate_right_button.button_up.connect(_on_rotate_right_button_released)
 	
+	# Connect boost button signals (from E_button scene)
+	if boost_button:
+		boost_button.pressed_boost.connect(_on_boost_button_pressed)
+		boost_button.released_boost.connect(_on_boost_button_released)
+	
 	# Set initial appearance
 	thrust_button.add_theme_color_override("icon_normal_color", button_normal_color)
 	thrust_button.add_theme_color_override("icon_pressed_color", button_pressed_color)
@@ -39,6 +48,15 @@ func _ready():
 	rotate_left_button.add_theme_color_override("icon_pressed_color", button_pressed_color)
 	rotate_right_button.add_theme_color_override("icon_normal_color", rotate_normal_color)
 	rotate_right_button.add_theme_color_override("icon_pressed_color", button_pressed_color)
+
+# Show/hide the boost button (called from HUD controller)
+func show_boost_button():
+	if boost_button:
+		boost_button.visible = true
+
+func hide_boost_button():
+	if boost_button:
+		boost_button.visible = false
 
 # Handle touch input events for simultaneous button detection
 func _input(event):
@@ -73,6 +91,14 @@ func _input(event):
 					_on_rotate_right_button_released()
 			elif not rotate_right_button.get_global_rect().has_point(touch_position) and rotate_right_active and event is InputEventScreenTouch and not event.pressed:
 				_on_rotate_right_button_released()
+
+			if boost_button.get_global_rect().has_point(touch_position):
+				if not boost_active and event is InputEventScreenTouch and event.pressed:
+					_on_boost_button_pressed()
+				elif boost_active and event is InputEventScreenTouch and not event.pressed:
+					_on_boost_button_released()
+			elif not boost_button.get_global_rect().has_point(touch_position) and boost_active and event is InputEventScreenTouch and not event.pressed:
+				_on_boost_button_released()
 
 func _on_thrust_button_pressed():
 	thrust_active = true
@@ -110,12 +136,12 @@ func _on_rotate_right_button_released():
 	Input.action_release("rotate_right")
 	emit_signal("rotate_right_released")
 
-func show_controls():
-	visible = true
+func _on_boost_button_pressed():
+	boost_active = true
+	Input.action_press("boost")
+	emit_signal("boost_pressed")
 
-func hide_controls():
-	visible = false
-
-# Detect if running on mobile device
-func is_mobile_device() -> bool:
-	return OS.get_name() == "Android" or OS.get_name() == "iOS"
+func _on_boost_button_released():
+	boost_active = false
+	Input.action_release("boost")
+	emit_signal("boost_released")

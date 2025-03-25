@@ -1,8 +1,8 @@
 extends Control
 class_name HUDController
 
-@onready var e_button = $MarginContainer/BoostControl/E_button
 @onready var fuel_slider = $MarginContainer/FuelControls/FuelSlider
+@onready var touch_controls = $MarginContainer/TouchControls
 
 # Colors for fuel gauge gradient
 var green_color: Color = Color(0, 1, 0)  # Green
@@ -10,16 +10,17 @@ var yellow_color: Color = Color(1, 1, 0)  # Yellow
 var red_color: Color = Color(1, 0, 0)  # Red
 
 func _ready() -> void:
-	if e_button:
+	# E button is now managed through touch_controls
+	if touch_controls:
 		show_boost_available()
 
 func show_boost_available() -> void:
-	if e_button:
-		e_button.visible = true
+	if touch_controls:
+		touch_controls.show_boost_button()
 
 func hide_boost_available() -> void:
-	if e_button:
-		e_button.visible = false
+	if touch_controls:
+		touch_controls.hide_boost_button()
 
 func update_fuel_display(current_fuel: float, max_fuel: float) -> void:
 	if fuel_slider:
