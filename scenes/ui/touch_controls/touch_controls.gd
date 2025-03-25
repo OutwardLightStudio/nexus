@@ -19,8 +19,8 @@ signal boost_released
 var buttons = {}
 # Dictionary to store active touch events and their affected buttons
 var active_touches = {}
-# Touch detection radius in pixels
-var touch_radius: float = 50.0
+# Touch detection radius in pixels - increased to allow easier simultaneous button presses
+var touch_radius: float = 75.0
 
 # Colors
 var button_normal_color = Color("#6b6b6b")
