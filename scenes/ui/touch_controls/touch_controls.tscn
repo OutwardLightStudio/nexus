@@ -1,0 +1,163 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdexohi4hhbl8"]
+
+[ext_resource type="Script" uid="uid://ccxfpxqfkwbiu" path="res://scenes/ui/touch_controls/touch_controls.gd" id="1_gcar5"]
+[ext_resource type="Script" uid="uid://e3r4l58gljcf" path="res://scenes/ui/touch_controls/touch_button.gd" id="2_j5bdo"]
+[ext_resource type="Script" uid="uid://c0rjrfpy40stw" path="res://scenes/ui/touch_controls/arrow_up.gd" id="3_t15rr"]
+[ext_resource type="Script" uid="uid://cv862d2dfrgn3" path="res://scenes/ui/touch_controls/arrow_left.gd" id="4_qfscv"]
+[ext_resource type="Script" uid="uid://di1xtkxvl6jnt" path="res://scenes/ui/touch_controls/arrow_right.gd" id="5_mueb3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbyvx"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk7c3"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="TouchControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gcar5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -230.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="ThrustButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
+script = ExtResource("2_j5bdo")
+label_text = "W"
+
+[node name="ArrowIcon" type="TextureRect" parent="VBoxContainer/ThrustButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_t15rr")
+
+[node name="KeyLabel" type="Label" parent="VBoxContainer/ThrustButton"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 26.0
+offset_bottom = -7.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "W"
+vertical_alignment = 2
+
+[node name="RotationContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="RotateLeftButton" type="Button" parent="VBoxContainer/RotationContainer"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
+script = ExtResource("2_j5bdo")
+label_text = "A"
+
+[node name="ArrowIcon" type="TextureRect" parent="VBoxContainer/RotationContainer/RotateLeftButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_qfscv")
+
+[node name="KeyLabel" type="Label" parent="VBoxContainer/RotationContainer/RotateLeftButton"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 26.0
+offset_bottom = -7.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "A"
+vertical_alignment = 2
+
+[node name="RotateRightButton" type="Button" parent="VBoxContainer/RotationContainer"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
+script = ExtResource("2_j5bdo")
+label_text = "D"
+
+[node name="ArrowIcon" type="TextureRect" parent="VBoxContainer/RotationContainer/RotateRightButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_mueb3")
+
+[node name="KeyLabel" type="Label" parent="VBoxContainer/RotationContainer/RotateRightButton"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 26.0
+offset_bottom = -7.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "D"
+vertical_alignment = 2
