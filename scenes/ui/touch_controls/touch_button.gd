@@ -25,10 +25,6 @@ func _ready():
 	pressed.connect(_on_button_pressed)
 	released.connect(_on_button_released)
 
-func _draw():
-	# Draw button with rounded corners (8px radius)
-	var style = get_theme_stylebox("normal")
-
 func _on_button_pressed():
 	# Change the color of the icon when pressed
 	if arrow_icon:
