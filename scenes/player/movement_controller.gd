@@ -25,9 +25,9 @@ func _ready() -> void:
 func process(delta: float) -> void:
 	if parent.current_state in [parent.State.CRASHED, parent.State.TRANSITIONING]:
 		return
-		
-	process_thrust(delta)
+	# Boost takes precedence over thrust
 	process_boost(delta)
+	process_thrust(delta)
 	process_rotation(delta)
 	update_boost_cooldown(delta)
 
@@ -45,7 +45,6 @@ func process_thrust(delta: float) -> void:
 func process_boost(delta: float) -> void:
 	# Handle boost activation
 	if Input.is_action_just_pressed("boost") and can_activate_boost():
-		# Emit signal instead of directly calling fuel controller
 		boost_requested.emit()
 	
 	# Process active boost
@@ -84,7 +83,6 @@ func can_activate_boost() -> bool:
 	return (
 		parent.current_fuel >= parent.boost_fuel_cost
 		and not is_boost_active
-		and not parent.is_thrusting
 		and boost_enabled
 	)
 
