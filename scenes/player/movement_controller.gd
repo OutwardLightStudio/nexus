@@ -84,7 +84,6 @@ func can_activate_boost() -> bool:
 	return (
 		parent.current_fuel >= parent.boost_fuel_cost
 		and not is_boost_active
-		and not parent.is_thrusting
 		and boost_enabled
 	)
 
