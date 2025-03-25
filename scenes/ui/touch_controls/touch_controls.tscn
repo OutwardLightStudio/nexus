@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://cdexohi4hhbl8"]
 
-[ext_resource type="Script" uid="uid://ccxfpxqfkwbiu" path="res://scenes/ui/touch_controls/touch_controls.gd" id="1_gcar5"]
-[ext_resource type="Script" uid="uid://e3r4l58gljcf" path="res://scenes/ui/touch_controls/touch_button.gd" id="2_j5bdo"]
-[ext_resource type="Script" uid="uid://c0rjrfpy40stw" path="res://scenes/ui/touch_controls/arrow_up.gd" id="3_t15rr"]
-[ext_resource type="Script" uid="uid://cv862d2dfrgn3" path="res://scenes/ui/touch_controls/arrow_left.gd" id="4_qfscv"]
-[ext_resource type="Script" uid="uid://di1xtkxvl6jnt" path="res://scenes/ui/touch_controls/arrow_right.gd" id="5_mueb3"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/touch_controls.gd" id="1_gcar5"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/touch_button.gd" id="2_j5bdo"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/arrow_up.gd" id="3_t15rr"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/arrow_left.gd" id="4_qfscv"]
+[ext_resource type="Script" path="res://scenes/ui/touch_controls/arrow_right.gd" id="5_mueb3"]
 [ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://scenes/e_button.tscn" id="6_1vydk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbyvx"]
@@ -45,10 +45,11 @@ theme_override_constants/separation = 10
 [node name="ThrustButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 script = ExtResource("2_j5bdo")
+label_text = "W"
 
 [node name="ArrowIcon" type="TextureRect" parent="VBoxContainer/ThrustButton"]
 layout_mode = 1
@@ -88,10 +89,11 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 script = ExtResource("2_j5bdo")
+label_text = "A"
 
 [node name="ArrowIcon" type="TextureRect" parent="VBoxContainer/RotationContainer/RotateLeftButton"]
 layout_mode = 1
@@ -126,10 +128,11 @@ vertical_alignment = 2
 custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mbyvx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xk7c3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mbyvx")
 script = ExtResource("2_j5bdo")
+label_text = "D"
 
 [node name="ArrowIcon" type="TextureRect" parent="VBoxContainer/RotationContainer/RotateRightButton"]
 layout_mode = 1
@@ -175,9 +178,5 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="E_button" parent="BoostControl" instance=ExtResource("6_1vydk")]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 82.0
-offset_bottom = 82.0
+position = Vector2(50, 50)
 scale = Vector2(4, 4)
