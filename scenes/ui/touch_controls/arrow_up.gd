@@ -6,9 +6,6 @@ func _draw():
 		Vector2(size.x / 2, 0),
 		Vector2(size.x, size.y),
 		Vector2(size.x * 0.7, size.y),
-		Vector2(size.x * 0.7, size.y),
-		Vector2(size.x * 0.7, size.y),
-		Vector2(size.x * 0.3, size.y),
 		Vector2(size.x * 0.3, size.y),
 		Vector2(0, size.y)
 	])
