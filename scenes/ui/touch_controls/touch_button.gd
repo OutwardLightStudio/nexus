@@ -28,8 +28,6 @@ func _ready():
 func _draw():
 	# Draw button with rounded corners (8px radius)
 	var style = get_theme_stylebox("normal")
-	if style:
-		# The button already has its style defined in the theme
 
 func _on_button_pressed():
 	# Change the color of the icon when pressed
