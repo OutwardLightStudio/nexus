@@ -52,14 +52,13 @@ stretch_mode = 5
 
 [node name="LowerLeftControl" type="Control" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="rotate_left_button" type="TextureButton" parent="MarginContainer/LowerLeftControl"]
 layout_mode = 0
-offset_left = -150.0
 offset_top = -130.0
-offset_right = -50.0
+offset_right = 100.0
 offset_bottom = -30.0
 action_mode = 0
 texture_normal = ExtResource("4_gss2c")
@@ -68,9 +67,9 @@ stretch_mode = 5
 
 [node name="rotate_right_button" type="TextureButton" parent="MarginContainer/LowerLeftControl"]
 layout_mode = 0
-offset_left = -150.0
+offset_left = 110.0
 offset_top = -130.0
-offset_right = -50.0
+offset_right = 210.0
 offset_bottom = -30.0
 action_mode = 0
 texture_normal = ExtResource("5_h022r")
