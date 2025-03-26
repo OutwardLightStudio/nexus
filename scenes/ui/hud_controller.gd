@@ -15,11 +15,17 @@ func _ready() -> void:
 		e_button.pressed.connect(_on_boost_button_pressed)
 
 func _on_boost_button_pressed() -> void:
-	# Simulate a keyboard "boost" press by sending an InputEventAction
-	var event = InputEventAction.new()
-	event.action = "boost"
-	event.pressed = true
-	Input.parse_input_event(event)
+	# Send boost press event
+	var press_event = InputEventAction.new()
+	press_event.action = "boost"
+	press_event.pressed = true
+	Input.parse_input_event(press_event)
+	
+	# Send boost release event immediately after
+	var release_event = InputEventAction.new()
+	release_event.action = "boost"
+	release_event.pressed = false
+	Input.parse_input_event(release_event)
 
 func show_boost_available() -> void:
 	if e_button:
