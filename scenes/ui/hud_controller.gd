@@ -1,7 +1,8 @@
 extends Control
 class_name HUDController
 
-@onready var e_button = $MarginContainer/BoostControl/E_button
+@onready var boost_button = $MarginContainer/BoostControl/boost_button
+@onready var thrust_button = $MarginContainer/ThrustControl/thrust_button
 @onready var fuel_slider = $MarginContainer/FuelControls/FuelSlider
 
 # Colors for fuel gauge gradient
@@ -10,9 +11,13 @@ var yellow_color: Color = Color(1, 1, 0)  # Yellow
 var red_color: Color = Color(1, 0, 0)  # Red
 
 func _ready() -> void:
-	if e_button:
+	if boost_button:
 		show_boost_available()
-		e_button.pressed.connect(_on_boost_button_pressed)
+		boost_button.pressed.connect(_on_boost_button_pressed)
+	
+	if thrust_button:
+		thrust_button.button_down.connect(_on_thrust_button_pressed)
+		thrust_button.button_up.connect(_on_thrust_button_released)
 
 func _on_boost_button_pressed() -> void:
 	# Send boost press event
@@ -27,13 +32,25 @@ func _on_boost_button_pressed() -> void:
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 
+func _on_thrust_button_pressed() -> void:
+	var press_event = InputEventAction.new()
+	press_event.action = "thrust"
+	press_event.pressed = true
+	Input.parse_input_event(press_event)
+
+func _on_thrust_button_released() -> void:
+	var release_event = InputEventAction.new()
+	release_event.action = "thrust"
+	release_event.pressed = false
+	Input.parse_input_event(release_event)
+
 func show_boost_available() -> void:
-	if e_button:
-		e_button.visible = true
+	if boost_button:
+		boost_button.visible = true
 
 func hide_boost_available() -> void:
-	if e_button:
-		e_button.visible = false
+	if boost_button:
+		boost_button.visible = false
 
 func update_fuel_display(current_fuel: float, max_fuel: float) -> void:
 	if fuel_slider:

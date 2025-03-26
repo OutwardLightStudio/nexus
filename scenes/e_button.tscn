@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2rt1lvgtdcsq"]
-
-[ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="1_3cnlo"]
-
-[node name="E_button" type="TextureButton"]
-texture_normal = ExtResource("1_3cnlo")
