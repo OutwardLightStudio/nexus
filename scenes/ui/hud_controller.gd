@@ -14,17 +14,17 @@ var red_color: Color = Color(1, 0, 0)  # Red
 func _ready() -> void:
 	if boost_button:
 		show_boost_available()
-		boost_button.pressed.connect(_on_boost_button_pressed)
+		boost_button.pressed.connect(_on_boost_button_down)
 	
 	if thrust_button:
-		thrust_button.button_down.connect(_on_thrust_button_pressed)
-		thrust_button.button_up.connect(_on_thrust_button_released)
+		thrust_button.button_down.connect(_on_thrust_button_down)
+		thrust_button.button_up.connect(_on_thrust_button_up)
 	
 	if rotate_left_button:
-		rotate_left_button.button_down.connect(_on_rotate_left_button_pressed)
-		rotate_left_button.button_up.connect(_on_rotate_left_button_released)
+		rotate_left_button.button_down.connect(_on_rotate_left_button_down)
+		rotate_left_button.button_up.connect(_on_rotate_left_button_up)
 
-func _on_boost_button_pressed() -> void:
+func _on_boost_button_down() -> void:
 	# Send boost press event
 	var press_event = InputEventAction.new()
 	press_event.action = "boost"
@@ -37,26 +37,26 @@ func _on_boost_button_pressed() -> void:
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 
-func _on_thrust_button_pressed() -> void:
+func _on_thrust_button_down() -> void:
 	var press_event = InputEventAction.new()
 	press_event.action = "thrust"
 	press_event.pressed = true
 	Input.parse_input_event(press_event)
 
-func _on_thrust_button_released() -> void:
+func _on_thrust_button_up() -> void:
 	var release_event = InputEventAction.new()
 	release_event.action = "thrust"
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 
-func _on_rotate_left_button_pressed() -> void:
+func _on_rotate_left_button_down() -> void:
 	print("rotate_left pressed")
 	var press_event = InputEventAction.new()
 	press_event.action = "rotate_left"
 	press_event.pressed = true
 	Input.parse_input_event(press_event)
 
-func _on_rotate_left_button_released() -> void:
+func _on_rotate_left_button_up() -> void:
 	print("rotate_left released")
 	var release_event = InputEventAction.new()
 	release_event.action = "rotate_left"
