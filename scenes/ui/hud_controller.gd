@@ -1,8 +1,9 @@
 extends Control
 class_name HUDController
 
-@onready var boost_button = $MarginContainer/BoostControl/boost_button
-@onready var thrust_button = $MarginContainer/ThrustControl/thrust_button
+@onready var boost_button = $MarginContainer/LowerRightControl/boost_button
+@onready var thrust_button = $MarginContainer/LowerRightControl/thrust_button
+@onready var rotate_left_button = $MarginContainer/LowerLeftControl/rotate_left_button
 @onready var fuel_slider = $MarginContainer/FuelControls/FuelSlider
 
 # Colors for fuel gauge gradient
@@ -18,6 +19,10 @@ func _ready() -> void:
 	if thrust_button:
 		thrust_button.button_down.connect(_on_thrust_button_pressed)
 		thrust_button.button_up.connect(_on_thrust_button_released)
+	
+	if rotate_left_button:
+		rotate_left_button.button_down.connect(_on_rotate_left_button_pressed)
+		rotate_left_button.button_up.connect(_on_rotate_left_button_released)
 
 func _on_boost_button_pressed() -> void:
 	# Send boost press event
@@ -41,6 +46,20 @@ func _on_thrust_button_pressed() -> void:
 func _on_thrust_button_released() -> void:
 	var release_event = InputEventAction.new()
 	release_event.action = "thrust"
+	release_event.pressed = false
+	Input.parse_input_event(release_event)
+
+func _on_rotate_left_button_pressed() -> void:
+	print("rotate_left pressed")
+	var press_event = InputEventAction.new()
+	press_event.action = "rotate_left"
+	press_event.pressed = true
+	Input.parse_input_event(press_event)
+
+func _on_rotate_left_button_released() -> void:
+	print("rotate_left released")
+	var release_event = InputEventAction.new()
+	release_event.action = "rotate_left"
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 
