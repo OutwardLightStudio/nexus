@@ -55,28 +55,24 @@ func _on_thrust_button_up() -> void:
 	Input.parse_input_event(release_event)
 
 func _on_rotate_left_button_down() -> void:
-	print("rotate_left pressed")
 	var press_event = InputEventAction.new()
 	press_event.action = "rotate_left"
 	press_event.pressed = true
 	Input.parse_input_event(press_event)
 
 func _on_rotate_left_button_up() -> void:
-	print("rotate_left released")
 	var release_event = InputEventAction.new()
 	release_event.action = "rotate_left"
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 
 func _on_rotate_right_button_down() -> void:
-	print("rotate_right pressed")
 	var press_event = InputEventAction.new()
 	press_event.action = "rotate_right"
 	press_event.pressed = true
 	Input.parse_input_event(press_event)
 
 func _on_rotate_right_button_up() -> void:
-	print("rotate_right released")
 	var release_event = InputEventAction.new()
 	release_event.action = "rotate_right"
 	release_event.pressed = false
