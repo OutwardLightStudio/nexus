@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1v1ppm8x01cy"]
+[gd_scene load_steps=6 format=3 uid="uid://c1v1ppm8x01cy"]
 
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/ui/fuel_slider.tscn" id="1_mgo7f"]
 [ext_resource type="Script" uid="uid://dbr1lj3lpo6hp" path="res://scenes/ui/hud_controller.gd" id="1_n2p4f"]
 [ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="3_8klnk"]
 [ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="4_8qguk"]
+[ext_resource type="Texture2D" uid="uid://c56meuininoqc" path="res://assets/sprites/Thrust Button.png" id="5_136eg"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -73,5 +74,7 @@ offset_left = -150.0
 offset_top = -130.0
 offset_right = -50.0
 offset_bottom = -30.0
+action_mode = 0
+texture_normal = ExtResource("5_136eg")
 ignore_texture_size = true
 stretch_mode = 5
