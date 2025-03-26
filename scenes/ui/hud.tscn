@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1v1ppm8x01cy"]
 
-[ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/fuel_slider.tscn" id="1_mgo7f"]
+[ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/ui/fuel_slider.tscn" id="1_mgo7f"]
 [ext_resource type="Script" uid="uid://dbr1lj3lpo6hp" path="res://scenes/ui/hud_controller.gd" id="1_n2p4f"]
-[ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://scenes/e_button.tscn" id="2_kgtxk"]
 [ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="3_8klnk"]
+[ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="4_8qguk"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -52,10 +52,22 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="E_button" parent="MarginContainer/BoostControl" instance=ExtResource("2_kgtxk")]
+[node name="boost_button" type="TextureButton" parent="MarginContainer/BoostControl"]
 layout_mode = 0
-offset_left = -150.0
-offset_top = -150.0
-offset_right = -150.0
-offset_bottom = -150.0
-scale = Vector2(4, 4)
+offset_left = -136.0
+offset_top = -113.0
+offset_right = -36.0
+offset_bottom = -13.0
+texture_normal = ExtResource("4_8qguk")
+
+[node name="ThrustControl" type="Control" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="thrust_button" type="TextureButton" parent="MarginContainer/ThrustControl"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -24.0
+offset_right = -10.0
+offset_bottom = 16.0
