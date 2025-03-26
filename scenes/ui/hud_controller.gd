@@ -1,8 +1,10 @@
 extends Control
 class_name HUDController
 
-@onready var boost_button = $MarginContainer/BoostControl/boost_button
-@onready var thrust_button = $MarginContainer/ThrustControl/thrust_button
+@onready var boost_button = $MarginContainer/LowerRightControl/boost_button
+@onready var thrust_button = $MarginContainer/LowerRightControl/thrust_button
+@onready var rotate_left_button = $MarginContainer/LowerLeftControl/rotate_left_button
+@onready var rotate_right_button = $MarginContainer/LowerLeftControl/rotate_right_button
 @onready var fuel_slider = $MarginContainer/FuelControls/FuelSlider
 
 # Colors for fuel gauge gradient
@@ -13,13 +15,21 @@ var red_color: Color = Color(1, 0, 0)  # Red
 func _ready() -> void:
 	if boost_button:
 		show_boost_available()
-		boost_button.pressed.connect(_on_boost_button_pressed)
+		boost_button.pressed.connect(_on_boost_button_down)
 	
 	if thrust_button:
-		thrust_button.button_down.connect(_on_thrust_button_pressed)
-		thrust_button.button_up.connect(_on_thrust_button_released)
+		thrust_button.button_down.connect(_on_thrust_button_down)
+		thrust_button.button_up.connect(_on_thrust_button_up)
+	
+	if rotate_left_button:
+		rotate_left_button.button_down.connect(_on_rotate_left_button_down)
+		rotate_left_button.button_up.connect(_on_rotate_left_button_up)
+	
+	if rotate_right_button:
+		rotate_right_button.button_down.connect(_on_rotate_right_button_down)
+		rotate_right_button.button_up.connect(_on_rotate_right_button_up)
 
-func _on_boost_button_pressed() -> void:
+func _on_boost_button_down() -> void:
 	# Send boost press event
 	var press_event = InputEventAction.new()
 	press_event.action = "boost"
@@ -32,15 +42,39 @@ func _on_boost_button_pressed() -> void:
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 
-func _on_thrust_button_pressed() -> void:
+func _on_thrust_button_down() -> void:
 	var press_event = InputEventAction.new()
 	press_event.action = "thrust"
 	press_event.pressed = true
 	Input.parse_input_event(press_event)
 
-func _on_thrust_button_released() -> void:
+func _on_thrust_button_up() -> void:
 	var release_event = InputEventAction.new()
 	release_event.action = "thrust"
+	release_event.pressed = false
+	Input.parse_input_event(release_event)
+
+func _on_rotate_left_button_down() -> void:
+	var press_event = InputEventAction.new()
+	press_event.action = "rotate_left"
+	press_event.pressed = true
+	Input.parse_input_event(press_event)
+
+func _on_rotate_left_button_up() -> void:
+	var release_event = InputEventAction.new()
+	release_event.action = "rotate_left"
+	release_event.pressed = false
+	Input.parse_input_event(release_event)
+
+func _on_rotate_right_button_down() -> void:
+	var press_event = InputEventAction.new()
+	press_event.action = "rotate_right"
+	press_event.pressed = true
+	Input.parse_input_event(press_event)
+
+func _on_rotate_right_button_up() -> void:
+	var release_event = InputEventAction.new()
+	release_event.action = "rotate_right"
 	release_event.pressed = false
 	Input.parse_input_event(release_event)
 

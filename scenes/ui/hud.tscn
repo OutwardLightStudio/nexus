@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1v1ppm8x01cy"]
+[gd_scene load_steps=8 format=3 uid="uid://c1v1ppm8x01cy"]
 
 [ext_resource type="PackedScene" uid="uid://bds3pc6arkgvv" path="res://scenes/ui/fuel_slider.tscn" id="1_mgo7f"]
 [ext_resource type="Script" uid="uid://dbr1lj3lpo6hp" path="res://scenes/ui/hud_controller.gd" id="1_n2p4f"]
 [ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="3_8klnk"]
 [ext_resource type="Texture2D" uid="uid://bgnwdu55fbsnw" path="res://assets/sprites/E Button.png" id="4_8qguk"]
+[ext_resource type="Texture2D" uid="uid://xl2ckpgdnknk" path="res://assets/sprites/Left Arrow Button.png" id="4_gss2c"]
 [ext_resource type="Texture2D" uid="uid://c56meuininoqc" path="res://assets/sprites/Thrust Button.png" id="5_136eg"]
+[ext_resource type="Texture2D" uid="uid://bf505qxaulaov" path="res://assets/sprites/Right Arrow Button.png" id="5_h022r"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -48,12 +50,38 @@ texture = ExtResource("3_8klnk")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BoostControl" type="Control" parent="MarginContainer"]
+[node name="LowerLeftControl" type="Control" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="rotate_left_button" type="TextureButton" parent="MarginContainer/LowerLeftControl"]
+layout_mode = 0
+offset_top = -130.0
+offset_right = 100.0
+offset_bottom = -30.0
+action_mode = 0
+texture_normal = ExtResource("4_gss2c")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="rotate_right_button" type="TextureButton" parent="MarginContainer/LowerLeftControl"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = -130.0
+offset_right = 210.0
+offset_bottom = -30.0
+action_mode = 0
+texture_normal = ExtResource("5_h022r")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LowerRightControl" type="Control" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="boost_button" type="TextureButton" parent="MarginContainer/BoostControl"]
+[node name="boost_button" type="TextureButton" parent="MarginContainer/LowerRightControl"]
 layout_mode = 0
 offset_left = -300.0
 offset_top = -130.0
@@ -63,12 +91,7 @@ texture_normal = ExtResource("4_8qguk")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="ThrustControl" type="Control" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="thrust_button" type="TextureButton" parent="MarginContainer/ThrustControl"]
+[node name="thrust_button" type="TextureButton" parent="MarginContainer/LowerRightControl"]
 layout_mode = 0
 offset_left = -150.0
 offset_top = -130.0
