@@ -64,6 +64,7 @@ action_mode = 0
 texture_normal = ExtResource("4_gss2c")
 ignore_texture_size = true
 stretch_mode = 5
+touch_screen_mode = "finger"
 
 [node name="rotate_right_button" type="TextureButton" parent="MarginContainer/LowerLeftControl"]
 layout_mode = 0
@@ -75,6 +76,7 @@ action_mode = 0
 texture_normal = ExtResource("5_h022r")
 ignore_texture_size = true
 stretch_mode = 5
+touch_screen_mode = "finger"
 
 [node name="LowerRightControl" type="Control" parent="MarginContainer"]
 layout_mode = 2
@@ -90,6 +92,7 @@ offset_bottom = -30.0
 texture_normal = ExtResource("4_8qguk")
 ignore_texture_size = true
 stretch_mode = 5
+touch_screen_mode = "finger"
 
 [node name="thrust_button" type="TextureButton" parent="MarginContainer/LowerRightControl"]
 layout_mode = 0
@@ -101,3 +104,4 @@ action_mode = 0
 texture_normal = ExtResource("5_136eg")
 ignore_texture_size = true
 stretch_mode = 5
+touch_screen_mode = "finger"
