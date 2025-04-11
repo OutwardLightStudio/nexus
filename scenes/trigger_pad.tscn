@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwwd8ds1by6v4"]
 
-[ext_resource type="Script" uid="uid://de51sfs6bqecj" path="res://scenes/trigger_pad.gd" id="1_o7bu2"]
+[ext_resource type="Script" path="res://scenes/trigger_pad.gd" id="1_o7bu2"]
 [ext_resource type="Material" uid="uid://cvmemsmtpuply" path="res://materials/trigger_button_material.tres" id="2_v53y0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dhi3p"]
@@ -139,8 +139,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aoc51"]
 _data = {
-&"RESET": SubResource("Animation_hu8ms"),
-&"button_press": SubResource("Animation_2mvwi")
+"RESET": SubResource("Animation_hu8ms"),
+"button_press": SubResource("Animation_2mvwi")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w8qy3"]
@@ -157,7 +157,7 @@ mesh = SubResource("BoxMesh_5uo1j")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_aoc51")
+"": SubResource("AnimationLibrary_aoc51")
 }
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

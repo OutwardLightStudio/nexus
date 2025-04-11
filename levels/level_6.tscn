@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ci1r5smh8wjkv"]
 
 [ext_resource type="Material" uid="uid://b5c507hor1smc" path="res://materials/glow_green.tres" id="1_3u114"]
-[ext_resource type="Script" uid="uid://ju04761ldv71" path="res://levels/landing_pad.gd" id="1_ow586"]
+[ext_resource type="Script" path="res://levels/landing_pad.gd" id="1_ow586"]
 [ext_resource type="PackedScene" uid="uid://brs3why3rugsi" path="res://scenes/player/player.tscn" id="2_m7w60"]
 [ext_resource type="PackedScene" uid="uid://it6majhd2sqd" path="res://environments/cave_2.tscn" id="3_abo2c"]
 

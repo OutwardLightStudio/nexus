@@ -3,12 +3,11 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cmkxrspbykuhk"
-path="res://.godot/imported/._Hit 6.wav-fb5b929d7308ce3d52a2e853a10b2ced.sample"
+valid=false
 
 [deps]
 
 source_file="res://assets/sound/Version_1/._Hit 6.wav"
-dest_files=["res://.godot/imported/._Hit 6.wav-fb5b929d7308ce3d52a2e853a10b2ced.sample"]
 
 [params]
 
