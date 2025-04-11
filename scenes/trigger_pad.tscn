@@ -157,7 +157,7 @@ mesh = SubResource("BoxMesh_5uo1j")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_aoc51")
+&"": SubResource("AnimationLibrary_aoc51")
 }
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

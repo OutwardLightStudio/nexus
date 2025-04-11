@@ -70,6 +70,9 @@ var current_fuel: float:
 		return fuel_controller.current_fuel if fuel_controller else 0.0
 
 func _ready():
+	# Add to player group to make detection easier
+	add_to_group("player")
+	
 	await get_tree().process_frame  # Ensure children are ready
 	connect_signals()
 	effects.get_node("BubblesAudio").playing = false
@@ -120,6 +123,11 @@ func _on_body_entered(body: Node3D):
 		
 	# Ignore collisions with landing pads - they're handled by the landing controller
 	if body.is_in_group("Goal"):
+		return
+	
+	# Handle collisions with hazards
+	if body.is_in_group("Hazard"):
+		start_crash_sequence()
 		return
 		
 	# Check if impact velocity is dangerous
