@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://dm4cwn1uiokpq"]
 
-[ext_resource type="Script" path="res://scenes/bat_enemy/bat_movement.gd" id="1_bat"]
+[ext_resource type="Script" uid="uid://bjr4pnfsji4l2" path="res://scenes/bat_enemy/bat_movement.gd" id="1_bat"]
 [ext_resource type="PackedScene" uid="uid://buvwk2y4l40gj" path="res://scenes/bat_enemy/better_bat.tscn" id="2_bat"]
 
 [sub_resource type="Curve3D" id="Curve3D_test"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(0, 2, 0, 0, -2, 0, -8, 0, 0, -2, 0, 0, 2, 0, 0, -0.248833, 3.4565, 0.47409, -2, 0, 0, 2, 0, 0, 8, 0, 0),
-"tilts": PackedFloat32Array(0, 0, 0)
+"points": PackedVector3Array(0, 2, 0, 0, -2, 0, -8, 0, 0, -2, 0, 0, 2, 0, 0, -0.248833, 3.4565, 0.47409, -2, 0, 0, 2, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 7.53402, 2.78657, -1.48012, 0, 0, 0, 0, 0, 0, 6.01055, 4.66025, -1.81419),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
-point_count = 3
+point_count = 5
 
 [node name="TestScene" type="Node3D"]
 
@@ -34,6 +34,7 @@ path_interval_type = 0
 path_interval = 0.5
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
