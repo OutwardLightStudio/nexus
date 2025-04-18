@@ -3,12 +3,11 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://jkhvmqmrj5x0"
-path="res://.godot/imported/._Rocket_Engage.wav-4dce3aec4c9aa0e5798310451f69a266.sample"
+valid=false
 
 [deps]
 
 source_file="res://assets/sound/Version_1/._Rocket_Engage.wav"
-dest_files=["res://.godot/imported/._Rocket_Engage.wav-4dce3aec4c9aa0e5798310451f69a266.sample"]
 
 [params]
 

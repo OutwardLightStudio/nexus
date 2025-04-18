@@ -3,12 +3,11 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d3jlkdvhhe1c0"
-path="res://.godot/imported/._Booster.wav-77e6834298e0b46e4c865533fd34d426.sample"
+valid=false
 
 [deps]
 
 source_file="res://assets/sound/Version_1/._Booster.wav"
-dest_files=["res://.godot/imported/._Booster.wav-77e6834298e0b46e4c865533fd34d426.sample"]
 
 [params]
 
