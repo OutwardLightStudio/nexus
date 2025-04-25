@@ -8,12 +8,12 @@
 [ext_resource type="Material" uid="uid://cpqrd0jhqcnfe" path="res://particles/bubble_particles.tres" id="4_g7o3v"]
 [ext_resource type="Script" uid="uid://bq855tidx5t6s" path="res://scenes/player/fuel_controller.gd" id="4_qtt7p"]
 [ext_resource type="AudioStream" uid="uid://evbgf785fj5w" path="res://assets/sound/success.mp3" id="4_vxola"]
+[ext_resource type="PackedScene" uid="uid://bt0f8rckpnlhi" path="res://scenes/fuel_slider.tscn" id="5_lgqa7"]
 [ext_resource type="Texture2D" uid="uid://bwn182o341f5n" path="res://assets/sprites/Fuel gauge speedometer.png" id="5_sbef4"]
 [ext_resource type="Script" uid="uid://d20lgmwr5ukoh" path="res://scenes/player/stability_controller.gd" id="6_jxs5u"]
 [ext_resource type="PackedScene" uid="uid://b2rt1lvgtdcsq" path="res://e_button.tscn" id="7_0w6d2"]
 [ext_resource type="Script" uid="uid://e56syxi527h2" path="res://scenes/player/landing_controller.gd" id="7_p66tl"]
 [ext_resource type="Material" uid="uid://yq2ywrvw8k7y" path="res://materials/ship_blue.tres" id="8_5sakl"]
-[ext_resource type="PackedScene" path="res://scenes/ui/fuel_slider.tscn" id="8_o0vq7"]
 [ext_resource type="Material" uid="uid://6fwd7r8tmf8v" path="res://particles/explosion_particles.tres" id="10_xw84m"]
 [ext_resource type="Script" uid="uid://xoexbbmgrf0d" path="res://scenes/player/effects_controller.gd" id="11_smcew"]
 [ext_resource type="Material" uid="uid://xrb2i7caokn4" path="res://particles/success_particles.tres" id="12_msahl"]
@@ -108,17 +108,19 @@ script = ExtResource("2_m6058")
 [node name="Fuel" type="Node3D" parent="."]
 script = ExtResource("4_qtt7p")
 
-[node name="FuelSlider" parent="Fuel" instance=ExtResource("8_o0vq7")]
-offset_left = 62.0
-offset_top = 99.0
-offset_right = 127.0
-offset_bottom = 404.0
-size_flags_horizontal = 0
-
 [node name="Sprite2D" type="Sprite2D" parent="Fuel"]
+z_index = 900
 position = Vector2(107, 685)
 scale = Vector2(5, 5)
 texture = ExtResource("5_sbef4")
+
+[node name="FuelSlider" parent="Fuel" instance=ExtResource("5_lgqa7")]
+light_mask = 512
+visibility_layer = 128
+z_as_relative = false
+offset_top = 445.0
+offset_right = 142.0
+offset_bottom = 686.0
 
 [node name="Stability" type="Node3D" parent="."]
 script = ExtResource("6_jxs5u")
